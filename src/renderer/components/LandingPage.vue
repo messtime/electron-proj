@@ -40,8 +40,8 @@
       open (link) {
         this.$electron.shell.openExternal(link)
       },
-      goPage(link) {
-        this.$router.push(link);
+      goPage (link) {
+        this.$router.push(link)
       }
     }
   }
