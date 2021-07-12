@@ -8,6 +8,7 @@
         </span>
         <system-information></system-information>
       </div>
+          <button @click="goPage('/page1')">Go Page</button><br><br>
 
       <div class="right-side">
         <div class="doc">
@@ -38,13 +39,16 @@
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
+      },
+      goPage(link) {
+        this.$router.push(link);
       }
     }
   }
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+  /* @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro'); */
 
   * {
     box-sizing: border-box;
