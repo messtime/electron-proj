@@ -12,9 +12,14 @@ export default new Router({
       component: require('@/components/LandingPage').default
     },
     {
-      path: '/',
+      path: '/page1',
       name: 'page1',
       component: require('@/components/page1').default
+    },
+        {
+      path: '/',
+      name: 'login',
+      component: require('@/components/login').default
     },
     {
       path: '*',

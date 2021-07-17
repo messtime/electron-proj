@@ -377,8 +377,9 @@ export default {
 <style lang="scss">
 .main-page {
   width: 850px;
-  height: 80vh;
-  margin: 100px auto;
+  height: 550px;
+  margin: 0px auto;
+  padding-top: 50px;
   font-size: 20px;
 }
 .ant-select-selection-selected-value,
