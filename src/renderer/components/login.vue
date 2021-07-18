@@ -15,7 +15,6 @@
   },
     methods: {
       pressEnter() {
-          debugger;
           if(this.userInput == this.password) {
             this.goPage('/overview');
           } else {
