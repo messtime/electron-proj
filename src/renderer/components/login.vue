@@ -17,7 +17,7 @@
       pressEnter() {
           debugger;
           if(this.userInput == this.password) {
-            this.goPage('/page1');
+            this.goPage('/overview');
           } else {
               this.userInput = '';
           }

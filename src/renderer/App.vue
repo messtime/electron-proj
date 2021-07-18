@@ -1,16 +1,49 @@
 <template>
   <div id="app">
+    <div class="test-router" v-show="showTest">
+      <a-row>
+      <a-col :span="6" v-for="router in routerList" :key="router.path">
+          <router-link :to="router.path">{{ router.path }}</router-link>
+      </a-col>
+      </a-row>
+    </div>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'application'
-  }
+import router from "./router";
+
+export default {
+  name: "application",
+  data() {
+    return {
+      showTest: false,
+      routerList: router.options.routes,
+    };
+  },
+  methods: {
+    hideTest(test) {
+      const keyCode = test.keyCode;
+      if (test === 27 || keyCode === 27) {
+        this.showTest = !this.showTest;
+      }
+    },
+  },
+  mounted() {
+    setTimeout(() => {
+      document.onkeydown = this.hideTest;
+    }, 200);
+  },
+};
 </script>
 
-<style>
+<style lang="scss">
+/* CSS */
+.test-router {
+  .ant-col {
+    line-height: 2;
+  }
 
-  /* CSS */
+}
 </style>

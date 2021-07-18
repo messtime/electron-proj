@@ -21,6 +21,11 @@ export default new Router({
       name: 'login',
       component: require('@/components/login').default
     },
+            {
+      path: '/overview',
+      name: 'overview',
+      component: require('@/components/overview').default
+    },
     {
       path: '*',
       redirect: '/'
