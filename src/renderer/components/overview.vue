@@ -57,9 +57,12 @@ const EditableCell = {
       this.editable = false;
       this.$emit("change", this.value);
     },
-    // edit() {
-    //   this.editable = true;
-    // },
+    edit() {
+            debugger;
+      this.$router.push("step2");
+      window.open("https://baidu.com")
+      // this.editable = true;
+    },
   },
 };
 export default {
@@ -108,6 +111,7 @@ export default {
   },
   methods: {
     onCellChange(key, dataIndex, value) {
+      debugger;
       this.$router.push("step2");
       // const dataSource = [...this.dataSource];
       // const target = dataSource.find(item => item.key === key);
@@ -135,7 +139,6 @@ export default {
     },
   },
   mounted() {
-    debugger;
     var tempData = JSON.parse(localStorage.getItem("overviewData"));
     if (tempData && tempData.length >= 1) {
       this.dataSource = tempData;
