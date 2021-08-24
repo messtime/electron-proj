@@ -37,6 +37,11 @@ export default new Router({
       component: require('@/components/overview').default
     },
     {
+      path: '/loan',
+      name: 'loan',
+      component: require('@/components/loan').default
+    },
+    {
       path: '*',
       redirect: '/'
     }
