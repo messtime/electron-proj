@@ -85,7 +85,7 @@ export default {
       let avgMoney = (lastMoney + this.total+ 23667) / 2;
       let item = {
         index: 1,
-        date: '2021/1/10',
+        date: '2021/2/10',
         sum: 23667,
         fee: 4970,
         allSum: (this.total - 23667) + this.fee,
