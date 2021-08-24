@@ -108,40 +108,40 @@
   </div>
 </template>
 <script>
-const companyData = ['广州永日电梯有限公司'];
+const companyData = ['广州永日电梯有限公司']
 const typeData = [
   'P系列乘客电梯',
   'P系列观光电梯',
   'P系列病床电梯',
   '载货电梯',
   '家用电梯',
-  '杂物电梯',
-];
+  '杂物电梯'
+]
 const typeNote = {
   P系列乘客电梯: '乘客用电梯',
   P系列观光电梯: '观光用乘客电梯，部分轿壁为玻璃结构',
   P系列病床电梯: '医院专用电梯，可载病床',
   载货电梯: '载货用垫铁，可载人和货物',
   家用电梯: '家用电梯',
-  杂物电梯: '最大载重为300kh,速度为0.5m/s',
-};
+  杂物电梯: '最大载重为300kh,速度为0.5m/s'
+}
 const seriesNote = {
   GSM: '低噪音，高节能，绿色环保节能型小机房',
   GSW: '低噪音，高节能绿色和环保节能型无机房',
   落地式: '请查看境界配置 word模板',
-  窗口式: '请查看境界配置 word模板',
-};
+  窗口式: '请查看境界配置 word模板'
+}
 const seriesData = {
   1: ['GSM', 'GSW'],
-  2: ['落地式', '窗口式'],
-};
+  2: ['落地式', '窗口式']
+}
 const loadData = {
   1: [250, 320, 400, 450, 630, 825, 1050, 1250, 1350, 1600, 2000],
   2: [250, 320, 400, 450, 630, 825, 1050, 1250, 1350, 1600],
   3: [1600, 2000],
   4: [1000, 1600, 2000, 3000, 5000],
-  5: [225, 320, 400],
-};
+  5: [225, 320, 400]
+}
 const speedData = {
   1: [30, 60],
   2: [30, 60, 90],
@@ -151,17 +151,17 @@ const speedData = {
   6: [60, 90, 105, 120],
   7: [60, 90],
   8: [60, 90, 105],
-  9: [24],
-};
+  9: [24]
+}
 const doorData = {
   1: ['中分双扇门', '旁开双扇门'],
   2: ['中分四扇门', '中分六扇门', '旁开双扇门'],
-  3: ['中分双扇门', '旁开双扇门', '手动门'],
-};
+  3: ['中分双扇门', '旁开双扇门', '手动门']
+}
 export default {
   name: 'page1',
   components: {},
-  data() {
+  data () {
     return {
       company: '',
       type: '',
@@ -180,63 +180,63 @@ export default {
       door: '',
       speedData,
       loadData,
-      doorData,
-    };
+      doorData
+    }
   },
   methods: {
-    open(link) {
-      this.$electron.shell.openExternal(link);
+    open (link) {
+      this.$electron.shell.openExternal(link)
     },
-    handleTypeChange(value) {
+    handleTypeChange (value) {
       switch (value) {
         case '杂物电梯':
-          this.seriesDataTemp = seriesData[2];
-          break;
+          this.seriesDataTemp = seriesData[2]
+          break
         default:
-          this.seriesDataTemp = seriesData[1];
+          this.seriesDataTemp = seriesData[1]
       }
-      this.series = '';
-      this.load = '';
-      this.speed = '';
-      this.door = '';
-      this.loadDataTemp = [];
-      this.speedDataTemp = [];
-      this.doorDataTemp = [];
+      this.series = ''
+      this.load = ''
+      this.speed = ''
+      this.door = ''
+      this.loadDataTemp = []
+      this.speedDataTemp = []
+      this.doorDataTemp = []
     },
-    handleSeriesChange(value) {
-      var data = this.type + value;
+    handleSeriesChange (value) {
+      var data = this.type + value
       switch (data) {
         case 'P系列乘客电梯GSM':
         case 'P系列观光电梯GSM':
-          this.loadDataTemp = loadData[1];
-          break;
+          this.loadDataTemp = loadData[1]
+          break
         case 'P系列乘客电梯GSW':
         case 'P系列观光电梯GSW':
-          this.loadDataTemp = loadData[2];
-          break;
+          this.loadDataTemp = loadData[2]
+          break
         case 'P系列病床电梯GSM':
         case 'P系列病床电梯GSW':
-          this.loadDataTemp = loadData[3];
-          break;
+          this.loadDataTemp = loadData[3]
+          break
         case '载货电梯GSM':
         case '载货电梯GSW':
-          this.loadDataTemp = loadData[4];
-          break;
+          this.loadDataTemp = loadData[4]
+          break
         case '家用电梯GSM':
         case '家用电梯GSW':
-          this.loadDataTemp = loadData[5];
-          break;
+          this.loadDataTemp = loadData[5]
+          break
         default:
-          this.loadDataTemp = loadData[1];
+          this.loadDataTemp = loadData[1]
       }
-      this.load = '';
-      this.speed = '';
-      this.door = '';
-      this.speedDataTemp = [];
-      this.doorDataTemp = [];
+      this.load = ''
+      this.speed = ''
+      this.door = ''
+      this.speedDataTemp = []
+      this.doorDataTemp = []
     },
-    handleLoadChange(value) {
-      var data = this.type + this.series + value;
+    handleLoadChange (value) {
+      var data = this.type + this.series + value
 
       switch (data) {
         case 'P系列乘客电梯GSM250':
@@ -261,27 +261,27 @@ export default {
         case '载货电梯GSW2000':
         case '载货电梯GSW3000':
         case '载货电梯GSW5000':
-          this.speedDataTemp = speedData[1];
-          break;
+          this.speedDataTemp = speedData[1]
+          break
         case 'P系列乘客电梯GSM450':
         case 'P系列乘客电梯GSW450':
-          this.speedDataTemp = speedData[2];
-          break;
+          this.speedDataTemp = speedData[2]
+          break
         case 'P系列乘客电梯GSM630':
         case 'P系列乘客电梯GSW630':
-          this.speedDataTemp = speedData[3];
-          break;
+          this.speedDataTemp = speedData[3]
+          break
 
         case 'P系列乘客电梯GSM825':
-          this.speedDataTemp = speedData[4];
-          break;
+          this.speedDataTemp = speedData[4]
+          break
         case 'P系列乘客电梯GSM1050':
         case 'P系列乘客电梯GSM1250':
         case 'P系列乘客电梯GSM1350':
         case 'P系列乘客电梯GSM1600':
         case 'P系列乘客电梯GSM2000':
-          this.speedDataTemp = speedData[5];
-          break;
+          this.speedDataTemp = speedData[5]
+          break
         case 'P系列乘客电梯GSW825':
         case 'P系列乘客电梯GSW1050':
         case 'P系列乘客电梯GSW1250':
@@ -291,12 +291,12 @@ export default {
         case 'P系列病床电梯GSM2000':
         case 'P系列病床电梯GSW1600':
         case 'P系列病床电梯GSW2000':
-          this.speedDataTemp = speedData[6];
-          break;
+          this.speedDataTemp = speedData[6]
+          break
         case 'P系列观光电梯GSM450':
         case 'P系列观光电梯GSW450':
-          this.speedDataTemp = speedData[7];
-          break;
+          this.speedDataTemp = speedData[7]
+          break
         case 'P系列观光电梯GSM630':
         case 'P系列观光电梯GSM825':
         case 'P系列观光电梯GSM1050':
@@ -310,8 +310,8 @@ export default {
         case 'P系列观光电梯GSW1250':
         case 'P系列观光电梯GSW1350':
         case 'P系列观光电梯GSW1600':
-          this.speedDataTemp = speedData[8];
-          break;
+          this.speedDataTemp = speedData[8]
+          break
 
         case '家用电梯GSM225':
         case '家用电梯GSM320':
@@ -319,39 +319,39 @@ export default {
         case '家用电梯GSW225':
         case '家用电梯GSW320':
         case '家用电梯GSW400':
-          this.speedDataTemp = speedData[9];
-          break;
+          this.speedDataTemp = speedData[9]
+          break
         default:
-          this.speedDataTemp = speedData[9];
+          this.speedDataTemp = speedData[9]
       }
-      this.speed = '';
-      this.door = '';
-      this.doorDataTemp = [];
+      this.speed = ''
+      this.door = ''
+      this.doorDataTemp = []
     },
-    handleSpeedChange(value) {
+    handleSpeedChange (value) {
       // var data = this.type + this.series + this.speed
       switch (value) {
         case '载货电梯GSM3000':
         case '载货电梯GSM5000':
         case '载货电梯GSW3000':
         case '载货电梯GSW5000':
-          this.doorDataTemp = doorData[2];
-          break;
+          this.doorDataTemp = doorData[2]
+          break
         case '家用电梯GSM225':
         case '家用电梯GSM320':
         case '家用电梯GSM400':
         case '家用电梯GSW225':
         case '家用电梯GSW320':
         case '家用电梯GSW400':
-          this.doorDataTemp = doorData[3];
-          break;
+          this.doorDataTemp = doorData[3]
+          break
         default:
-          this.doorDataTemp = doorData[1];
+          this.doorDataTemp = doorData[1]
       }
-      this.door = '';
+      this.door = ''
     },
-    handleDoorChange(value) {},
-    copy() {
+    handleDoorChange (value) {},
+    copy () {
       var content =
         this.company +
         ' ' +
@@ -363,17 +363,17 @@ export default {
         ' ' +
         this.speed +
         ' ' +
-        this.door;
-      var aux = document.createElement('input');
-      aux.setAttribute('value', content);
-      document.body.appendChild(aux);
-      aux.select();
-      document.execCommand('copy');
-      document.body.removeChild(aux);
-      alert('复制成功');
-    },
-  },
-};
+        this.door
+      var aux = document.createElement('input')
+      aux.setAttribute('value', content)
+      document.body.appendChild(aux)
+      aux.select()
+      document.execCommand('copy')
+      document.body.removeChild(aux)
+      alert('复制成功')
+    }
+  }
+}
 </script>
 <style lang="scss">
 .main-page {

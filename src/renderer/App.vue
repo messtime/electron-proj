@@ -12,30 +12,30 @@
 </template>
 
 <script>
-import router from "./router";
+import router from './router'
 
 export default {
-  name: "application",
-  data() {
+  name: 'application',
+  data () {
     return {
       showTest: false,
-      routerList: router.options.routes,
-    };
+      routerList: router.options.routes
+    }
   },
   methods: {
-    hideTest(test) {
-      const keyCode = test.keyCode;
+    hideTest (test) {
+      const keyCode = test.keyCode
       if (test === 27 || keyCode === 27) {
-        this.showTest = !this.showTest;
+        this.showTest = !this.showTest
       }
-    },
+    }
   },
-  mounted() {
+  mounted () {
     setTimeout(() => {
-      document.onkeydown = this.hideTest;
-    }, 200);
-  },
-};
+      document.onkeydown = this.hideTest
+    }, 200)
+  }
+}
 </script>
 
 <style lang="scss">

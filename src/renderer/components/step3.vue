@@ -37,47 +37,47 @@ const EditableCell = {
       </div>
     `,
   props: {
-    text: String,
+    text: String
   },
-  data() {
+  data () {
     return {
       value: this.text,
-      editable: false,
-    };
+      editable: false
+    }
   },
   methods: {
-    handleChange(e) {
-      const value = e.target.value;
-      this.value = value;
+    handleChange (e) {
+      const value = e.target.value
+      this.value = value
     },
-    check() {
-      this.editable = false;
-      this.$emit('change', this.value);
+    check () {
+      this.editable = false
+      this.$emit('change', this.value)
     },
-    edit() {
-      this.editable = true;
-    },
-  },
-};
+    edit () {
+      this.editable = true
+    }
+  }
+}
 export default {
   components: {
-    EditableCell,
+    EditableCell
   },
-  data() {
+  data () {
     return {
       dataSource: [
         {
           key: '0',
           name: 'P系列乘客电梯',
           age: 'GSM',
-          address: '250',
+          address: '250'
         },
         {
           key: '1',
           name: 'P系列乘客电梯',
           age: 'GSW',
-          address: '450',
-        },
+          address: '450'
+        }
       ],
       count: 2,
       columns: [
@@ -85,53 +85,50 @@ export default {
           title: '梯形',
           dataIndex: 'name',
           width: '30%',
-          scopedSlots: { customRender: 'name' },
+          scopedSlots: { customRender: 'name' }
         },
         {
           title: '系列',
-          dataIndex: 'age',
+          dataIndex: 'age'
         },
         {
           title: '载重（kg）',
-          dataIndex: 'address',
+          dataIndex: 'address'
         },
         {
           title: 'operation',
           dataIndex: 'operation',
-          scopedSlots: { customRender: 'operation' },
-        },
-      ],
-    };
+          scopedSlots: { customRender: 'operation' }
+        }
+      ]
+    }
   },
   methods: {
-    onCellChange(key, dataIndex, value) {
-
-
-      const dataSource = [...this.dataSource];
-      const target = dataSource.find(item => item.key === key);
+    onCellChange (key, dataIndex, value) {
+      const dataSource = [...this.dataSource]
+      const target = dataSource.find(item => item.key === key)
       if (target) {
-        target[dataIndex] = value;
-        this.dataSource = dataSource;
+        target[dataIndex] = value
+        this.dataSource = dataSource
       }
     },
-    onDelete(key) {
-
-      const dataSource = [...this.dataSource];
-      this.dataSource = dataSource.filter(item => item.key !== key);
+    onDelete (key) {
+      const dataSource = [...this.dataSource]
+      this.dataSource = dataSource.filter(item => item.key !== key)
     },
-    handleAdd() {
-      const { count, dataSource } = this;
+    handleAdd () {
+      const { count, dataSource } = this
       const newData = {
         key: count,
         name: `梯形${count}`,
         age: 'GSM',
-        address: `速度${count}`,
-      };
-      this.dataSource = [...dataSource, newData];
-      this.count = count + 1;
-    },
-  },
-};
+        address: `速度${count}`
+      }
+      this.dataSource = [...dataSource, newData]
+      this.count = count + 1
+    }
+  }
+}
 </script>
 <style>
 .editable-cell {

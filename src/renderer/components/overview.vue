@@ -40,75 +40,75 @@ const EditableCell = {
       </div>
     `,
   props: {
-    text: String,
+    text: String
   },
-  data() {
+  data () {
     return {
       value: this.text,
-      editable: false,
-    };
+      editable: false
+    }
   },
   methods: {
-    handleChange(e) {
-      const value = e.target.value;
-      this.value = value;
+    handleChange (e) {
+      const value = e.target.value
+      this.value = value
     },
-    check() {
-      this.editable = false;
-      this.$emit("change", this.value);
-    },
+    check () {
+      this.editable = false
+      this.$emit('change', this.value)
+    }
     // edit() {
     //   this.editable = true;
     // },
-  },
-};
+  }
+}
 export default {
   components: {
-    EditableCell,
+    EditableCell
   },
-  data() {
+  data () {
     return {
       dataSource: [
         {
-          key: "0",
-          name: "P系列乘客电梯",
-          age: "GSM",
-          address: "250",
+          key: '0',
+          name: 'P系列乘客电梯',
+          age: 'GSM',
+          address: '250'
         },
         {
-          key: "1",
-          name: "P系列乘客电梯",
-          age: "GSW",
-          address: "450",
-        },
+          key: '1',
+          name: 'P系列乘客电梯',
+          age: 'GSW',
+          address: '450'
+        }
       ],
       count: 2,
       columns: [
         {
-          title: "梯形",
-          dataIndex: "name",
-          width: "30%",
-          scopedSlots: { customRender: "name" },
+          title: '梯形',
+          dataIndex: 'name',
+          width: '30%',
+          scopedSlots: { customRender: 'name' }
         },
         {
-          title: "系列",
-          dataIndex: "age",
+          title: '系列',
+          dataIndex: 'age'
         },
         {
-          title: "载重（kg）",
-          dataIndex: "address",
+          title: '载重（kg）',
+          dataIndex: 'address'
         },
         {
-          title: "operation",
-          dataIndex: "operation",
-          scopedSlots: { customRender: "operation" },
-        },
-      ],
-    };
+          title: 'operation',
+          dataIndex: 'operation',
+          scopedSlots: { customRender: 'operation' }
+        }
+      ]
+    }
   },
   methods: {
-    onCellChange(key, dataIndex, value) {
-      this.$router.push("step2");
+    onCellChange (key, dataIndex, value) {
+      this.$router.push('step2')
       // const dataSource = [...this.dataSource];
       // const target = dataSource.find(item => item.key === key);
       // if (target) {
@@ -116,33 +116,33 @@ export default {
       //   this.dataSource = dataSource;
       // }
     },
-    onDelete(key) {
-      const dataSource = [...this.dataSource];
-      this.dataSource = dataSource.filter((item) => item.key !== key);
-      localStorage.setItem("overviewData", JSON.stringify(this.dataSource));
+    onDelete (key) {
+      const dataSource = [...this.dataSource]
+      this.dataSource = dataSource.filter((item) => item.key !== key)
+      localStorage.setItem('overviewData', JSON.stringify(this.dataSource))
     },
-    handleAdd() {
-      const { count, dataSource } = this;
+    handleAdd () {
+      const { count, dataSource } = this
       const newData = {
         key: count,
         name: `梯形${count}`,
-        age: "GSM",
-        address: `速度${count}`,
-      };
-      this.dataSource = [...dataSource, newData];
-      this.count = count + 1;
-      localStorage.setItem("overviewData", JSON.stringify(this.dataSource));
-    },
-  },
-  mounted() {
-    debugger;
-    var tempData = JSON.parse(localStorage.getItem("overviewData"));
-    if (tempData && tempData.length >= 1) {
-      this.dataSource = tempData;
-      this.count = tempData.length;
+        age: 'GSM',
+        address: `速度${count}`
+      }
+      this.dataSource = [...dataSource, newData]
+      this.count = count + 1
+      localStorage.setItem('overviewData', JSON.stringify(this.dataSource))
     }
   },
-};
+  mounted () {
+    debugger
+    var tempData = JSON.parse(localStorage.getItem('overviewData'))
+    if (tempData && tempData.length >= 1) {
+      this.dataSource = tempData
+      this.count = tempData.length
+    }
+  }
+}
 </script>
 <style lang="scss">
 .overview-page {

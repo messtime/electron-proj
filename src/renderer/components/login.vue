@@ -4,30 +4,29 @@
   </div>
 </template>
 <script>
-
   export default {
     name: 'login-page',
     data () {
-    return {
-      password: 'sl930211',
-      userInput: '',
-    }
+      return {
+        password: 'sl930211',
+        userInput: ''
+      }
   },
     methods: {
-      pressEnter() {
-          if(this.userInput == this.password) {
-            this.goPage('/overview');
-          } else {
-              this.userInput = '';
-          }
+      pressEnter () {
+        if (this.userInput == this.password) {
+          this.goPage('/overview')
+        } else {
+          this.userInput = ''
+        }
       },
       goPage (link) {
         this.$router.push(link)
       }
     },
-    mounted() {
-      this.$refs.login.$el.focus();
-    }
+    mounted () {
+      this.$refs.login.$el.focus()
+  }
   }
 </script>
 <style lang="scss">
