@@ -58,7 +58,7 @@ const EditableCell = {
       this.$emit("change", this.value);
     },
     edit() {
-            debugger;
+
       this.$router.push("step2");
       window.open("https://baidu.com")
       // this.editable = true;
@@ -134,7 +134,7 @@ export default {
         address: `速度${count}`,
       };
       this.dataSource = [...dataSource, newData];
-      this.count = count + 1;
+      this.count = count + 1  ;
       localStorage.setItem("overviewData", JSON.stringify(this.dataSource));
     },
   },
