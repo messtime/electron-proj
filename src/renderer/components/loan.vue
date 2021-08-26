@@ -21,35 +21,35 @@
 <script>
 const
   columns = [{
-      title: '期数',
-      dataIndex: 'index',
-      key: 'index',
-    },
-    {
-      title: '还款时间',
-      dataIndex: 'date',
-      key: 'date',
-    },
-    {
-      title: '还款本金',
-      dataIndex: 'sum',
-      key: 'sum',
-    },
-    {
-      title: '还款利息',
-      dataIndex: 'fee',
-      key: 'fee',
-    },
-    {
-      title: '提前还款额',
-      dataIndex: 'allSum',
-      key: 'allSum',
-    },
-    {
-      title: '实际利率(%)',
-      dataIndex: 'rate',
-      key: 'rate',
-    }
+    title: '期数',
+    dataIndex: 'index',
+    key: 'index'
+  },
+  {
+    title: '还款时间',
+    dataIndex: 'date',
+    key: 'date'
+  },
+  {
+    title: '还款本金',
+    dataIndex: 'sum',
+    key: 'sum'
+  },
+  {
+    title: '还款利息',
+    dataIndex: 'fee',
+    key: 'fee'
+  },
+  {
+    title: '提前还款额',
+    dataIndex: 'allSum',
+    key: 'allSum'
+  },
+  {
+    title: '实际利率(%)',
+    dataIndex: 'rate',
+    key: 'rate'
+  }
   ]
 
 const data = [{
@@ -58,80 +58,78 @@ const data = [{
   sum: 23667,
   fee: 4970,
   allSum: (1420000 - 23667) + 4970,
-  rate: (4970 + 4970) / 1420000 * 12 * 100,
+  rate: (4970 + 4970) / 1420000 * 12 * 100
 }]
-
 
 export default {
   name: 'loan',
-  data() {
+  data () {
     return {
       total: 1420000,
       fee: 4970,
       columns,
-      dataSource: [],
+      dataSource: []
     }
   },
   methods: {
-    pressEnter() {
+    pressEnter () {
       if (this.userInput == this.password) {
         this.goPage('/overview')
       } else {
         this.userInput = ''
       }
     },
-    compute(link) {
-      let lastMoney = this.total - 23667;
-      let avgMoney = (lastMoney + this.total+ 23667) / 2;
+    compute (link) {
+      let lastMoney = this.total - 23667
+      let avgMoney = (lastMoney + this.total + 23667) / 2
       let item = {
         index: 1,
         date: '2021/2/10',
         sum: 23667,
         fee: 4970,
         allSum: (this.total - 23667) + this.fee,
-        rate: (4970 + this.fee) / avgMoney * 12 * 100,
+        rate: (4970 + this.fee) / avgMoney * 12 * 100
       }
-      let itemAll = [];
-      itemAll.push({ ...item });
+      let itemAll = []
+      itemAll.push({ ...item })
       for (let i = 2; i < 5 * 12 + 1; i++) {
         if (i == 60) {
-            let lastMoney = this.total - 23667 * 60;
-            let avgMoney = (lastMoney + this.total+ 23667) / 2;
+          let lastMoney = this.total - 23667 * 60
+          let avgMoney = (lastMoney + this.total + 23667) / 2
           itemAll.push({
             index: 60,
             date: '2026/2/10',
             sum: 23667,
             fee: 4970,
             allSum: this.total - 23667 * 60,
-            rate: 4970 * 60 / avgMoney * 12 / 60 * 100,
+            rate: 4970 * 60 / avgMoney * 12 / 60 * 100
           })
-          continue;
+          continue
         }
-        item.index = i;
-        let dateArr = item.date.split('/');
+        item.index = i
+        let dateArr = item.date.split('/')
         if (dateArr[1] < 12) {
-          dateArr[1] = +dateArr[1] + 1;
+          dateArr[1] = +dateArr[1] + 1
         } else {
-          dateArr[0] = +dateArr[0] + 1;
-          dateArr[1] = 1;
+          dateArr[0] = +dateArr[0] + 1
+          dateArr[1] = 1
         }
-        item.date = dateArr.join('/');
-        item.allSum = item.allSum - 23667;
-        let lastMoney = item.allSum - this.fee;
-        let avgMoney = (lastMoney + this.total+ 23667) / 2;
-        let allFee = 4970 * item.index + this.fee;
-        item.rate = allFee / avgMoney * 12 / item.index * 100;
-        let tempItem = { ...item };
+        item.date = dateArr.join('/')
+        item.allSum = item.allSum - 23667
+        let lastMoney = item.allSum - this.fee
+        let avgMoney = (lastMoney + this.total + 23667) / 2
+        let allFee = 4970 * item.index + this.fee
+        item.rate = allFee / avgMoney * 12 / item.index * 100
+        let tempItem = { ...item }
         itemAll.push(tempItem)
       }
-      this.dataSource = itemAll;
+      this.dataSource = itemAll
     }
   },
-  mounted() {
+  mounted () {
     // this.compute();
   }
 }
-
 </script>
 <style lang="scss">
 .loan-page {

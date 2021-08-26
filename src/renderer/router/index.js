@@ -12,6 +12,21 @@ export default new Router({
       component: require('@/components/LandingPage').default
     },
     {
+      path: '/record',
+      name: 'record',
+      component: require('@/components/record').default
+    },
+    {
+      path: '/menu',
+      name: 'menu',
+      component: require('@/components/menu').default
+    },
+    {
+      path: '/month',
+      name: 'month',
+      component: require('@/components/month').default
+    },
+    {
       path: '/page1',
       name: 'page1',
       component: require('@/components/page1').default

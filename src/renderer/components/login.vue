@@ -8,14 +8,14 @@
     name: 'login-page',
     data () {
       return {
-        password: 'sl930211',
+        password: '0121',
         userInput: ''
       }
   },
     methods: {
       pressEnter () {
         if (this.userInput == this.password) {
-          this.goPage('/overview')
+          this.goPage('/menu')
         } else {
           this.userInput = ''
         }
