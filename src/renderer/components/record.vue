@@ -1,6 +1,9 @@
 <template>
   <div class="record-page">
     <div>
+      <a-button class="back-btn" @click="goBack">
+        回退
+      </a-button>
       <a-tabs default-active-key="1" @change="mainCallback">
         <a-tab-pane v-for="(item, index) in mainPane" :key="'main' + index" :tab="item.titleBar">
           <div>
@@ -156,24 +159,24 @@ const MayPane = [{
       title: 26,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     },
     {
       title: 27,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     },
     {
       title: 28,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     },
   ],
@@ -184,32 +187,32 @@ const JunePane = [{
         title: 1,
         dataSource: [{
           key: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
       {
         title: 2,
         dataSource: [{
           key: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
       {
         title: 3,
         dataSource: [{
           key: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
       {
         title: 4,
         dataSource: [{
           key: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
     ],
@@ -221,8 +224,8 @@ const JunePane = [{
         dataSource: [{
           key: '1',
           name: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
       {
@@ -230,8 +233,8 @@ const JunePane = [{
         dataSource: [{
           key: '2',
           name: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
       {
@@ -239,8 +242,8 @@ const JunePane = [{
         dataSource: [{
           key: '3',
           name: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
       {
@@ -248,8 +251,8 @@ const JunePane = [{
         dataSource: [{
           key: '4',
           name: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
       {
@@ -257,8 +260,8 @@ const JunePane = [{
         dataSource: [{
           key: '5',
           name: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
     ],
@@ -269,32 +272,32 @@ const JunePane = [{
         title: 15,
         dataSource: [{
           key: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
       {
         title: 16,
         dataSource: [{
           key: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
       {
         title: 17,
         dataSource: [{
           key: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
       {
         title: 18,
         dataSource: [{
           key: '1',
-          age: '聊天记录1',
-          address: '补充 1',
+          age: '聊天记录',
+          address: '补充',
         }, ],
       },
     ],
@@ -305,36 +308,36 @@ const JunePane = [{
       title: 21,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 22,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 23,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 24,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 25,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -344,22 +347,22 @@ const JunePane = [{
       title: 28,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 29,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 30,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -370,15 +373,15 @@ const JulyPane = [{
       title: 1,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 2,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -388,36 +391,36 @@ const JulyPane = [{
       title: 5,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 6,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 7,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 8,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 9,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -427,36 +430,36 @@ const JulyPane = [{
       title: 12,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 13,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 14,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 15,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 16,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -466,36 +469,36 @@ const JulyPane = [{
       title: 19,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 20,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 21,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 22,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 23,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -505,36 +508,36 @@ const JulyPane = [{
       title: 26,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 27,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 28,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 29,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 30,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -545,36 +548,36 @@ const AugustPane = [{
       title: 2,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 3,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 4,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 5,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 6,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -584,36 +587,36 @@ const AugustPane = [{
       title: 9,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 10,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 11,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 12,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 13,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -623,36 +626,36 @@ const AugustPane = [{
       title: 16,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 17,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 18,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 19,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 20,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -662,36 +665,36 @@ const AugustPane = [{
       title: 23,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 24,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 25,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 26,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 27,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -701,15 +704,15 @@ const AugustPane = [{
       title: 30,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 31,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -720,22 +723,22 @@ const SeptemberPane = [{
       title: 1,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 2,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 3,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -745,36 +748,36 @@ const SeptemberPane = [{
       title: 6,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 7,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 8,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 9,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 10,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -784,43 +787,43 @@ const SeptemberPane = [{
       title: 13,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 14,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 15,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 16,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 17,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 18,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -830,22 +833,22 @@ const SeptemberPane = [{
       title: 22,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 23,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 24,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -855,36 +858,36 @@ const SeptemberPane = [{
       title: 26,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 27,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 28,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 29,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, {
       title: 30,
       dataSource: [{
         key: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }, ],
     }, ],
   },
@@ -914,8 +917,8 @@ export default {
       dataSource: [{
         key: '1',
         name: '1',
-        age: '聊天记录1',
-        address: '补充 1',
+        age: '聊天记录',
+        address: '补充',
       }],
       count: 3,
       columns: [{
@@ -941,13 +944,16 @@ export default {
         {
           title: '操作',
           dataIndex: 'operation',
-          width: '8%',
+          width: '10%',
           scopedSlots: { customRender: 'operation' },
         },
       ],
     };
   },
   methods: {
+    goBack() {
+      window.history.back();
+    },
     onCellChange(key, dataIndex, mainIndex, listIndex, value) {
 
       // const dataSource = [...this.dataSource];
@@ -960,23 +966,28 @@ export default {
       //   target[dataIndex] = value;
       //   this.dataSource = dataSource;
       // }
-      data[mainIndex].list[listIndex].dataSource[key-1][dataIndex] = value;
+      data[mainIndex].list[listIndex].dataSource[key - 1][dataIndex] = value;
       localStorage.setItem('data' + this.month, JSON.stringify(data));
     },
     onDelete(key, mainIndex, listIndex) {
 
       // this.mainPane[mainIndex].list[listIndex].dataSource
       //
-
+      // debugger;
       // const data = [...this.mainPane];
       var dataTemp = this.mainPane[mainIndex].list[listIndex].dataSource;
-      for (var i = dataTemp.length - 1; i > key; i--) {
-        dataTemp[i].key = dataTemp[i].key - 1;
+      for (let i = dataTemp.length; i > key; i--) {
+        dataTemp[i - 1].key = i - 1;
       }
       dataTemp.splice(key - 1, 1);
-      const data = [...this.mainPane];
-      this.mainPane = data;
-      localStorage.setItem('data' + this.month, JSON.stringify(data));
+      const data = [...dataTemp];
+      this.mainPane[mainIndex].list[listIndex].dataSource = data
+      var te = [...this.mainPane];
+      this.mainPane = [];
+      setTimeout(() => {
+        this.mainPane = te;
+      }, 1)
+      localStorage.setItem('data' + this.month, JSON.stringify(this.mainPane));
       // const target = dataTemp.find((item) => item.key === key);
 
       // const dataSource = [...this.dataSource];
@@ -1084,6 +1095,13 @@ export default {
     .ant-input {
       width: 180px;
     }
+  }
+
+  .back-btn {
+    float: right;
+    right: 62px;
+    cursor: pointer;
+    z-index: 100;
   }
 
   .icon-style {
