@@ -1,7 +1,7 @@
 <template>
   <div class="main-page">
     <div class="title">选型向导v6.9.0</div>
-    
+
     <div class="item">
       <div class="label">制造公司</div>
       <div class="select">

@@ -15,7 +15,7 @@
     methods: {
       pressEnter () {
         if (this.userInput == this.password) {
-          this.goPage('/menu')
+          this.goPage('/month')
         } else {
           this.userInput = ''
         }
