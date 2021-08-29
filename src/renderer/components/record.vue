@@ -1,6 +1,16 @@
 <template>
   <div class="record-page">
     <div>
+      <!--       <a-button class="import-btn" @click="goBack">
+        导入
+      </a-button> -->
+      <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
+        <a-button>
+          <a-icon type="upload" /> Click to Upload </a-button>
+      </a-upload>
+      <a-button class="output-btn" @click="handleOutput">
+        导出
+      </a-button>
       <a-button class="back-btn" @click="goBack">
         回退
       </a-button>
@@ -60,6 +70,15 @@ const { dialog } = require('electron').remote;
 
 // dialog.showOpenDialog({ properties: ['openFile', 'C:/Users/lewei.li/Documents/Downloads/'] })
 
+import recordData from './Record/recordData.js'
+import EditableCell from './Record/EditableCell.js'
+
+import fs from 'fs'
+import path from 'path'
+
+
+
+const { MayPane, JunePane, JulyPane, AugustPane, SeptemberPane, paneMap } = recordData;
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
     console.log(
@@ -76,41 +95,7 @@ const rowSelection = {
   },
 };
 
-const EditableCell = {
-  template: `
-      <div class="editable-cell">
-        <div v-if="editable" class="editable-cell-input-wrapper ">
-          <a-input :value="value" @change="handleChange"  @pressEnter="check" @blur="check"/>
-        </div>
-        <div v-else class="editable-cell-text-wrapper"  @click="edit">
-          {{ value || ' ' }}
-        </div>
-      </div>
-    `,
-  props: {
-    text: String,
-  },
-  data() {
-    return {
-      value: this.text,
-      editable: false,
-    };
-  },
-  methods: {
-    handleChange(e) {
 
-      const value = e.target.value;
-      this.value = value;
-    },
-    check() {
-      this.editable = false;
-      this.$emit('change', this.value);
-    },
-    edit() {
-      this.editable = true;
-    },
-  },
-};
 
 const columns = [{
     title: '期数',
@@ -153,752 +138,7 @@ const data = [{
   rate: ((4970 + 4970) / 1420000) * 12 * 100,
 }, ];
 
-const MayPane = [{
-  titleBar: '26-28',
-  list: [{
-      title: 26,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    },
-    {
-      title: 27,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    },
-    {
-      title: 28,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    },
-  ],
-}];
-const JunePane = [{
-    titleBar: '1-4',
-    list: [{
-        title: 1,
-        dataSource: [{
-          key: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-      {
-        title: 2,
-        dataSource: [{
-          key: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-      {
-        title: 3,
-        dataSource: [{
-          key: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-      {
-        title: 4,
-        dataSource: [{
-          key: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-    ],
-  },
-  {
-    titleBar: '7-11',
-    list: [{
-        title: 7,
-        dataSource: [{
-          key: '1',
-          name: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-      {
-        title: 8,
-        dataSource: [{
-          key: '2',
-          name: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-      {
-        title: 9,
-        dataSource: [{
-          key: '3',
-          name: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-      {
-        title: 10,
-        dataSource: [{
-          key: '4',
-          name: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-      {
-        title: 11,
-        dataSource: [{
-          key: '5',
-          name: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-    ],
-  },
-  {
-    titleBar: '15-18',
-    list: [{
-        title: 15,
-        dataSource: [{
-          key: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-      {
-        title: 16,
-        dataSource: [{
-          key: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-      {
-        title: 17,
-        dataSource: [{
-          key: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-      {
-        title: 18,
-        dataSource: [{
-          key: '1',
-          age: '聊天记录',
-          address: '补充',
-        }, ],
-      },
-    ],
-  },
-  {
-    titleBar: '21-25',
-    list: [{
-      title: 21,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 22,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 23,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 24,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 25,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '28-30',
-    list: [{
-      title: 28,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 29,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 30,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-];
-const JulyPane = [{
-    titleBar: '1-2',
-    list: [{
-      title: 1,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 2,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '5-9',
-    list: [{
-      title: 5,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 6,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 7,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 8,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 9,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '12-16',
-    list: [{
-      title: 12,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 13,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 14,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 15,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 16,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '19-23',
-    list: [{
-      title: 19,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 20,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 21,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 22,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 23,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '26-30',
-    list: [{
-      title: 26,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 27,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 28,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 29,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 30,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-];
-const AugustPane = [{
-    titleBar: '2-6',
-    list: [{
-      title: 2,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 3,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 4,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 5,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 6,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '9-13',
-    list: [{
-      title: 9,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 10,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 11,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 12,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 13,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '16-20',
-    list: [{
-      title: 16,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 17,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 18,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 19,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 20,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '23-27',
-    list: [{
-      title: 23,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 24,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 25,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 26,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 27,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '30-31',
-    list: [{
-      title: 30,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 31,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-];
-const SeptemberPane = [{
-    titleBar: '1-3',
-    list: [{
-      title: 1,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 2,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 3,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '6-10',
-    list: [{
-      title: 6,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 7,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 8,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 9,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 10,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '13-18',
-    list: [{
-      title: 13,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 14,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 15,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 16,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 17,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 18,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '22-24',
-    list: [{
-      title: 22,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 23,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 24,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-  {
-    titleBar: '26-30',
-    list: [{
-      title: 26,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 27,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 28,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 29,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, {
-      title: 30,
-      dataSource: [{
-        key: '1',
-        age: '聊天记录',
-        address: '补充',
-      }, ],
-    }, ],
-  },
-];
-const paneMap = {
-  5: MayPane,
-  6: JunePane,
-  7: JulyPane,
-  8: AugustPane,
-  9: SeptemberPane,
-};
+
 
 export default {
   name: 'record',
@@ -954,6 +194,71 @@ export default {
     goBack() {
       window.history.back();
     },
+    dataHandle(info) {
+      var filePath =
+        info.file.path;
+      let fileData = fs.readFileSync(filePath, 'utf8')
+      try {
+        fileData = JSON.parse(fileData);
+        localStorage.setItem('data' + this.month, JSON.stringify(fileData['data' + this.month]));
+
+        this.mainPane = [];
+        setTimeout(() => { this.mainPane = fileData['data' + this.month]; }, 1)
+
+        this.$message.success(filePath + `  文件已导入 `);
+
+      } catch (error) {
+        this.$message.error('文件格式错误,请重新选择');
+
+      }
+      return;
+
+    },
+    handleImport(info) {
+      return;
+      // let fileContents = fs.readFileSync(path.resolve(__static, '../output.js'), 'utf8')
+
+      // console.log(fileContents);
+
+
+      // if (info.file.status !== 'uploading') {
+      //   console.log(info.file, info.fileList);
+      // }
+      // if (info.file.status === 'done') {
+      //   this.$message.success(`${info.file.name} 导入完成`);
+      // } else if (info.file.status === 'error') {
+      //   this.$message.error(`${info.file.name} 导入失败`);
+      // }
+    },
+    handleOutput() {
+      let filePath = path.join(__static, '../output.js');
+      let tempData = {};
+
+      fs.exists(filePath, (exists) => {
+        if (exists) {
+          var fileData = fs.readFileSync(filePath, 'utf8');
+          if (fileData) {
+            fileData = JSON.parse(fileData);
+
+            fileData['data' + this.month] = JSON.parse(localStorage.getItem('data' + this.month));
+            fs.writeFileSync(filePath, JSON.stringify(fileData, 'utf8'));
+            this.$message.success(`文件已导出到: ` + filePath);
+          } else {
+            tempData['data' + this.month] = JSON.parse(localStorage.getItem('data' + this.month));
+            fs.writeFileSync(filePath, JSON.stringify(tempData), 'utf8');
+            this.$message.success(`文件已导出到: ` + filePath);
+          }
+
+        } else {
+
+          tempData['data' + this.month] = JSON.parse(localStorage.getItem('data' + this.month));
+
+          fs.writeFileSync(filePath, JSON.stringify(tempData), 'utf8')
+          this.$message.success(`文件已导出到: ` + filePath);
+        }
+      });
+
+    },
     onCellChange(key, dataIndex, mainIndex, listIndex, value) {
 
       // const dataSource = [...this.dataSource];
@@ -993,6 +298,7 @@ export default {
       // const dataSource = [...this.dataSource];
       // this.dataSource = dataSource.filter((item) => item.key !== key);
     },
+
     handleAdd(mainIndex, listIndex) {
       const { count, dataSource } = this;
       const newData = {
@@ -1096,6 +402,27 @@ export default {
       width: 180px;
     }
   }
+
+  .import-btn {
+    float: right;
+    cursor: pointer;
+    right: 340px;
+    z-index: 100;
+  }
+
+  .output-btn {
+    float: right;
+    cursor: pointer;
+    z-index: 100;
+    right: 200px;
+  }
+
+  .editable-cell-text-wrapper {
+    white-space: pre-line;
+    position: relative;
+    top: -12px;
+  }
+
 
   .back-btn {
     float: right;
