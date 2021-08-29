@@ -18,7 +18,7 @@
     </a-button>
     <div class="file-nav">
       <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
-        <a-button  type="primary" >
+        <a-button type="primary">
           Import</a-button>
       </a-upload>
       <a-button type="primary" @click="handleOutput">
@@ -65,7 +65,31 @@ export default {
       return;
     },
     handleOutput() {
-      let filePath = path.join(__static, '../allOutput.js');
+      Date.prototype.format = function(fmt) {
+        var o = {
+          "M+": this.getMonth() + 1, //月份
+          "d+": this.getDate(), //日
+          "h+": this.getHours(), //小时
+          "m+": this.getMinutes(), //分
+          "s+": this.getSeconds(), //秒
+          "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+          "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) {
+          fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+          if (new RegExp("(" + k + ")").test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+          }
+        }
+        return fmt;
+      }
+
+      this.$message.success(`文件导出路径: ` + __static);
+      let filePath = path.join(__static, '../' + new Date().format("yyyy-MM-dd hh:mm:ss") + ' allExport.js');
+      this.$message.success(`文件导出路径: ` + filePath);
+
       fs.writeFileSync(filePath, JSON.stringify(localStorage), 'utf8')
       this.$message.success(`文件已导出到: ` + filePath);
 
@@ -97,11 +121,13 @@ export default {
       width: 180px;
     }
   }
+
   .file-nav {
     bottom: 25%;
     position: absolute;
     right: 15%;
   }
+
   .btn-container {
     margin-top: 21px;
   }

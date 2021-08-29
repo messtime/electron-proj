@@ -30,9 +30,13 @@
   }
 </script>
 <style lang="scss">
+body {
+  height: auto !important;
+}
   .login-page {
     text-align: center;
     width: 30%;
+    height: auto;
     max-width: 200px;
     margin: 0 auto;
     margin-top: 30%;
