@@ -2,7 +2,7 @@ export default {
   template: `
       <div class="editable-cell">
         <div v-if="editable" class="editable-cell-input-wrapper ">
-            <a-textarea :value="value"  autosize='true' @change="handleChange"  @blur="check" placeholder="请输入"  />
+            <a-textarea :value="value"  autosize='true' @enter="handleChange"   @change="handleChange"  @blur="check" placeholder="请输入"  />
 
         </div>
         <div v-else class="editable-cell-text-wrapper"  @click="edit">

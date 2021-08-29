@@ -15,7 +15,7 @@
 import router from './router'
 
 export default {
-  name: 'application',
+  name: '工作记录',
   data () {
     return {
       showTest: false,

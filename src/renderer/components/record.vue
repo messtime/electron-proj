@@ -4,7 +4,7 @@
       <!--       <a-button class="import-btn" @click="goBack">
         导入
       </a-button> -->
-      <div  class="import-btn">
+      <div class="import-btn">
         <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
           <a-button>
             导入 </a-button>
@@ -395,6 +395,16 @@ export default {
 .record-page {
   margin: 20px;
   margin-left: 10p;
+
+  .ant-tabs-nav .ant-tabs-tab-active {
+    text-shadow: none;
+    font-weight: bold;
+  }
+
+  .ant-tabs-tab,
+  .ant-tabs-nav {
+    font-size: 18px;
+  }
 
   .input-container {
     display: flex;
