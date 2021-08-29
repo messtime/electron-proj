@@ -112,14 +112,18 @@ export default {
       // this.$message.success(`文件导出路径: ` + filePath);
 
       // alert(filePath)
+      var messageA = this.$message;
       fs.writeFile(filePath, JSON.stringify(localStorage), function(err) {
         // alert(err)
         // alert(JSON.stringify(localStorage))
+        // this.$message.success(`文件已导出到: ` + filePath);
+
         if (err) {
-          return this.$message.error(err);
+          alert(err);
+          return messageA.error(err);
 
         }
-        this.$message.success(`文件已导出到: ` + filePath);
+        messageA.success(`文件已导出到: ` + filePath);
 
       })
     }
