@@ -109,12 +109,12 @@ export default {
       }
       mkdirPath('workRecord');
       let filePath = path.join('D:', '/workRecord/' + new Date().format("yyyy-MM-dd-hh-mm-ss") + '-allExport.js');
-      this.$message.success(`文件导出路径: ` + filePath);
+      // this.$message.success(`文件导出路径: ` + filePath);
 
-      alert(filePath)
+      // alert(filePath)
       fs.writeFile(filePath, JSON.stringify(localStorage), function(err) {
-        alert(err)
-        alert(JSON.stringify(localStorage))
+        // alert(err)
+        // alert(JSON.stringify(localStorage))
         if (err) {
           return this.$message.error(err);
 

@@ -299,6 +299,10 @@ export default {
       this.mainPane[mainIndex].list[listIndex].dataSource = data
       var te = [...this.mainPane];
       this.mainPane = [];
+      // this.$nextTick(()=>{
+      //    this.mainPane = te;
+      //   localStorage.setItem('data' + this.month, JSON.stringify(this.mainPane));
+      // })
       setTimeout(() => {
         this.mainPane = te;
         localStorage.setItem('data' + this.month, JSON.stringify(this.mainPane));

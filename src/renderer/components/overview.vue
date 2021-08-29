@@ -110,7 +110,7 @@ export default {
   },
   methods: {
     onCellChange (key, dataIndex, value) {
-      debugger
+      // debugger
       this.$router.push('step2')
       // const dataSource = [...this.dataSource];
       // const target = dataSource.find(item => item.key === key);
