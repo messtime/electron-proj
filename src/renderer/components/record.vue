@@ -4,10 +4,12 @@
       <!--       <a-button class="import-btn" @click="goBack">
         导入
       </a-button> -->
-      <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
-        <a-button>
-          <a-icon type="upload" /> Click to Upload </a-button>
-      </a-upload>
+      <div  class="import-btn">
+        <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
+          <a-button>
+            导入 </a-button>
+        </a-upload>
+      </div>
       <a-button class="output-btn" @click="handleOutput">
         导出
       </a-button>
@@ -404,9 +406,9 @@ export default {
   }
 
   .import-btn {
-    float: right;
+    position: absolute;
     cursor: pointer;
-    right: 340px;
+    right: 295px;
     z-index: 100;
   }
 
