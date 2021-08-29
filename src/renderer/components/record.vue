@@ -10,7 +10,7 @@
       <div class="btn-container" v-if="false">
 
       <div class="import-btn">
-        
+
         <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
           <a-button>
             导入 </a-button>
@@ -19,13 +19,13 @@
       <a-button class="output-btn" @click="handleOutput">
         导出
       </a-button>
- 
+
       </div>
 
       <a-tabs default-active-key="1" @change="mainCallback">
         <a-tab-pane v-for="(item, index) in mainPane" :key="'main' + index" :tab="item.titleBar">
           <div>
-            <a-tabs default-active-key="list0" :tabBarGutter="12" @change="callback" 
+            <a-tabs default-active-key="list0" :tabBarGutter="12" @change="callback"
             :tab-position="tabPosition">
               <a-tab-pane v-for="(list, indexList) in item.list" :key="'list' + indexList" :tab="month + '/' + list.title">
                 <div>
@@ -301,8 +301,8 @@ export default {
       this.mainPane = [];
       setTimeout(() => {
         this.mainPane = te;
+        localStorage.setItem('data' + this.month, JSON.stringify(this.mainPane));
       }, 1)
-      localStorage.setItem('data' + this.month, JSON.stringify(this.mainPane));
       // const target = dataTemp.find((item) => item.key === key);
 
       // const dataSource = [...this.dataSource];
@@ -336,7 +336,7 @@ export default {
     mainCallback(key) {
       this.activeKey = key;
     },
-    
+
     onChange(e) {
       console.log(e);
     },
@@ -391,7 +391,7 @@ export default {
     this.month = this.$route.query.month;
     var data = localStorage.getItem('data' + this.month);
     if (data) {
-  
+
       this.mainPane = JSON.parse(data);
       if(!this.mainPane || this.mainPane.length == 0) {
         this.mainPane = paneMap[this.month];

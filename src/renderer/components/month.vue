@@ -1,6 +1,9 @@
 <template>
   <div class="month-page">
-    <b>工作日志</b>
+    <div style="display: inline-block;vertical-align: middle;">
+      <b>工作日志</b><br />
+      <b>[2021]</b>
+    </div>
     <a-button type="primary" @click="goPage('/record?month=5')">
       5月
     </a-button>
@@ -65,6 +68,7 @@ export default {
       return;
     },
     handleOutput() {
+
       Date.prototype.format = function(fmt) {
         var o = {
           "M+": this.getMonth() + 1, //月份
@@ -86,14 +90,39 @@ export default {
         return fmt;
       }
 
-      this.$message.success(`文件导出路径: ` + __static);
-      let filePath = path.join(__static, '../' + new Date().format("yyyy-MM-dd hh:mm:ss") + ' allExport.js');
+      function mkdirPath(pathStr) {
+        var projectPath = 'D:/';
+        var tempDirArray = pathStr.split('\\');
+        for (var i = 0; i < tempDirArray.length; i++) {
+          projectPath = projectPath + '/' + tempDirArray[i];
+          if (fs.existsSync(projectPath)) {
+            var tempstats = fs.statSync(projectPath);
+            if (!(tempstats.isDirectory())) {
+              fs.unlinkSync(projectPath);
+              fs.mkdirSync(projectPath);
+            }
+          } else {
+            fs.mkdirSync(projectPath);
+          }
+        }
+        return projectPath;
+      }
+      mkdirPath('workRecord');
+      let filePath = path.join('D:', '/workRecord/' + new Date().format("yyyy-MM-dd-hh-mm-ss") + '-allExport.js');
       this.$message.success(`文件导出路径: ` + filePath);
 
-      fs.writeFileSync(filePath, JSON.stringify(localStorage), 'utf8')
-      this.$message.success(`文件已导出到: ` + filePath);
+      alert(filePath)
+      fs.writeFile(filePath, JSON.stringify(localStorage), function(err) {
+        alert(err)
+        alert(JSON.stringify(localStorage))
+        if (err) {
+          return this.$message.error(err);
 
-    },
+        }
+        this.$message.success(`文件已导出到: ` + filePath);
+
+      })
+    }
 
   },
   mounted() {
