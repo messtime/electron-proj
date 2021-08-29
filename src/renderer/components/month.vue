@@ -19,10 +19,10 @@
     <div class="file-nav">
       <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
         <a-button  type="primary" >
-         全部导入 </a-button>
+          Import</a-button>
       </a-upload>
       <a-button type="primary" @click="handleOutput">
-        全部导出
+        Export
       </a-button>
     </div>
   </div>
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     goPage(link) {
-      this.$router.push(link)
+      this.$router.push(link);
     },
     dataHandle(info) {
       var filePath =
@@ -50,7 +50,7 @@ export default {
 
         let temp = JSON.parse(fileData);
         Object.keys(temp).forEach((item) => {
-          localStorage.setItem(item, JSON.stringify(temp[item]))
+          localStorage.setItem(item, temp[item])
         })
         this.$message.success(filePath + `  文件已导入 `);
 
@@ -80,7 +80,9 @@ export default {
 </script>
 <style lang="scss">
 .month-page {
-  margin: 20px;
+  width: 70%;
+  margin: 20px auto;
+  padding-top: 15%;
   //   display: flex;
 
   .ant-btn {
@@ -96,8 +98,9 @@ export default {
     }
   }
   .file-nav {
-    margin-top: 300px;
-    float: right;
+    bottom: 25%;
+    position: absolute;
+    right: 15%;
   }
   .btn-container {
     margin-top: 21px;

@@ -17,8 +17,8 @@ export default {
   name: 'menu',
   data () {
     return {
-        showTest: true,
-              routerList: router.options.routes
+      showTest: true,
+      routerList: router.options.routes
 
     }
   },

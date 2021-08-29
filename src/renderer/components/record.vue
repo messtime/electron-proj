@@ -4,7 +4,13 @@
       <!--       <a-button class="import-btn" @click="goBack">
         导入
       </a-button> -->
+                   <a-button class="back-btn" @click="goBack">
+        Back
+      </a-button>
+      <div class="btn-container" v-if="false">
+
       <div class="import-btn">
+        
         <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
           <a-button>
             导入 </a-button>
@@ -13,16 +19,17 @@
       <a-button class="output-btn" @click="handleOutput">
         导出
       </a-button>
-      <a-button class="back-btn" @click="goBack">
-        回退
-      </a-button>
+ 
+      </div>
+
       <a-tabs default-active-key="1" @change="mainCallback">
         <a-tab-pane v-for="(item, index) in mainPane" :key="'main' + index" :tab="item.titleBar">
           <div>
-            <a-tabs default-active-key="list0" @change="callback" :tab-position="tabPosition">
+            <a-tabs default-active-key="list0" :tabBarGutter="12" @change="callback" 
+            :tab-position="tabPosition">
               <a-tab-pane v-for="(list, indexList) in item.list" :key="'list' + indexList" :tab="month + '/' + list.title">
                 <div>
-                  <a-table bordered :data-source="list.dataSource" :row-selection="rowSelection" :columns="columns">
+                  <a-table bordered  :data-source="list.dataSource" :row-selection="rowSelection" :columns="columns">
                     <template slot="age" slot-scope="text, record">
                       <editable-cell :text="text" @change="
                           onCellChange(
@@ -159,7 +166,7 @@ export default {
       dataSource: [{
         key: '1',
         name: '1',
-        age: '聊天记录',
+        age: '记录',
         address: '补充',
       }],
       count: 3,
@@ -170,7 +177,7 @@ export default {
           scopedSlots: { customRender: 'key' },
         },
         {
-          title: '聊天记录整理',
+          title: '记录整理',
           dataIndex: 'age',
           width: '60%',
 
@@ -194,7 +201,8 @@ export default {
   },
   methods: {
     goBack() {
-      window.history.back();
+      // window.history.back();
+      this.$router.push('/month')
     },
     dataHandle(info) {
       var filePath =
@@ -305,7 +313,7 @@ export default {
       const { count, dataSource } = this;
       const newData = {
         key: this.mainPane[mainIndex].list[listIndex].dataSource.length + 1,
-        age: '聊天记录',
+        age: '记录',
         address: `补充`,
       };
       this.mainPane[mainIndex].list[listIndex].dataSource.push(newData);
@@ -328,6 +336,7 @@ export default {
     mainCallback(key) {
       this.activeKey = key;
     },
+    
     onChange(e) {
       console.log(e);
     },
@@ -382,9 +391,16 @@ export default {
     this.month = this.$route.query.month;
     var data = localStorage.getItem('data' + this.month);
     if (data) {
+  
       this.mainPane = JSON.parse(data);
+      if(!this.mainPane || this.mainPane.length == 0) {
+        this.mainPane = paneMap[this.month];
+      localStorage.setItem('data' + this.month,JSON.stringify(this.mainPane))
+      }
+
     } else {
       this.mainPane = paneMap[this.month];
+      localStorage.setItem('data' + this.month,JSON.stringify(this.mainPane))
     }
     // this.compute();
   },
@@ -394,16 +410,17 @@ export default {
 <style lang="scss">
 .record-page {
   margin: 20px;
-  margin-left: 10p;
-
+  margin-left: 10px;
+  margin-top: 5px;
   .ant-tabs-nav .ant-tabs-tab-active {
     text-shadow: none;
     font-weight: bold;
+    font-size: 18px;
   }
 
   .ant-tabs-tab,
   .ant-tabs-nav {
-    font-size: 18px;
+    // font-size: 18px;
   }
 
   .input-container {
@@ -414,19 +431,23 @@ export default {
       width: 180px;
     }
   }
-
+.btn-container {
+  display: flex;
+}
   .import-btn {
-    position: absolute;
-    cursor: pointer;
-    right: 295px;
-    z-index: 100;
+    margin-right: 20px;
+    margin-left: 20px;
+    // position: absolute;
+    // cursor: pointer;
+    // right: 295px;
+    // z-index: 100;
   }
 
   .output-btn {
-    float: right;
-    cursor: pointer;
-    z-index: 100;
-    right: 200px;
+    // float: right;
+    // cursor: pointer;
+    // z-index: 100;
+    // right: 200px;
   }
 
   .editable-cell-text-wrapper {
@@ -437,8 +458,12 @@ export default {
 
 
   .back-btn {
-    float: right;
-    right: 62px;
+position: fixed;
+    bottom: 3%;
+    /* left: 5%; */
+    left: 25px;
+// float: right;
+    // right: 62px;
     cursor: pointer;
     z-index: 100;
   }
