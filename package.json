@@ -57,8 +57,11 @@
     }
   },
   "dependencies": {
+    "@tinymce/tinymce-vue": "^3.2.8",
     "ant-design-vue": "^1.7.8",
     "axios": "^0.18.0",
+    "element-ui": "^2.15.5",
+    "tinymce": "^5.9.1",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",

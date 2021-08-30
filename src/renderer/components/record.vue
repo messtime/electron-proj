@@ -1,48 +1,74 @@
 <template>
   <div class="record-page">
-    <div>
+    <div style="flex:3;">
       <!--       <a-button class="import-btn" @click="goBack">
         导入
       </a-button> -->
-                   <a-button class="back-btn" @click="goBack">
+      <a-button class="back-btn" @click="goBack">
         Back
       </a-button>
-      <div class="btn-container" v-if="false">
-
-      <div class="import-btn">
-
-        <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
-          <a-button>
-            导入 </a-button>
-        </a-upload>
-      </div>
-      <a-button class="output-btn" @click="handleOutput">
-        导出
+      <a-button class="switch-btn" @click="switchShow">
+        {{ rightShow ? "Close" : "Show" }}
       </a-button>
-
+      <div class="btn-container" v-if="false">
+        <div class="import-btn">
+          <a-upload
+            name="file"
+            :customRequest="dataHandle"
+            :showUploadList="false"
+            @change="handleImport"
+          >
+            <a-button> 导入 </a-button>
+          </a-upload>
+        </div>
+        <a-button class="output-btn" @click="handleOutput">
+          导出
+        </a-button>
       </div>
 
       <a-tabs default-active-key="1" @change="mainCallback">
-        <a-tab-pane v-for="(item, index) in mainPane" :key="'main' + index" :tab="item.titleBar">
+        <a-tab-pane
+          v-for="(item, index) in mainPane"
+          :key="'main' + index"
+          :tab="item.titleBar"
+        >
           <div>
-            <a-tabs default-active-key="list0" :tabBarGutter="12" @change="callback"
-            :tab-position="tabPosition">
-              <a-tab-pane v-for="(list, indexList) in item.list" :key="'list' + indexList" :tab="month + '/' + list.title">
+            <a-tabs
+              default-active-key="list0"
+              :tabBarGutter="12"
+              @change="callback"
+              :tab-position="tabPosition"
+            >
+              <a-tab-pane
+                v-for="(list, indexList) in item.list"
+                :key="'list' + indexList"
+                :tab="month + '/' + list.title"
+              >
                 <div>
-                  <a-table bordered  :data-source="list.dataSource" :row-selection="rowSelection" :columns="columns">
+                  <a-table
+                    bordered
+                    :data-source="list.dataSource"
+                    :row-selection="rowSelection"
+                    :columns="columns"
+                  >
                     <template slot="age" slot-scope="text, record">
-                      <editable-cell :text="text" @change="
+                      <editable-cell
+                        :text="text"
+                        @change="
                           onCellChange(
                             record.key,
                             'age',
                             index,
                             indexList,
-                            $event,
+                            $event
                           )
-                        " />
+                        "
+                      />
                     </template>
                     <template slot="address" slot-scope="text, record">
-                      <editable-cell :text="text" @change="
+                      <editable-cell
+                        :text="text"
+                        @change="
                           onCellChange(
                             record.key,
                             'address',
@@ -50,15 +76,23 @@
                             indexList,
                             $event
                           )
-                        " />
+                        "
+                      />
                     </template>
                     <template slot="operation" slot-scope="text, record">
-                      <a-popconfirm v-if="list.dataSource.length" title="Sure to delete?" @confirm="() => onDelete(record.key,index,indexList)">
-                        <a href="javascript:;">删除</a>
+                      <a-popconfirm
+                        v-if="list.dataSource.length"
+                        title="Sure to delete?"
+                        @confirm="() => onDelete(record.key, index, indexList)"
+                      >
+                        <a href="javascript:;">X</a>
                       </a-popconfirm>
                     </template>
                     <template slot="footer" slot-scope="text, record">
-                      <a-button class="editable-add-btn" @click="handleAdd(index, indexList, record)">
+                      <a-button
+                        class="editable-add-btn"
+                        @click="handleAdd(index, indexList, record)"
+                      >
                         Add
                       </a-button>
                     </template>
@@ -70,29 +104,49 @@
         </a-tab-pane>
       </a-tabs>
     </div>
+    <Menu class="menu-style" v-show="rightShow"></Menu>
   </div>
 </template>
 <script>
 // const { dialog } = require('electron')
 // console.log(dialog.showOpenDialog({ properties: ['openFile', 'file:///C:/Users/lewei.li/Documents/Downloads/'] }))
-const { dialog } = require('electron').remote;
+const { dialog } = require("electron").remote;
 
 // dialog.showOpenDialog({ properties: ['openFile', 'C:/Users/lewei.li/Documents/Downloads/'] })
 
-import recordData from './Record/recordData.js'
-import EditableCell from './Record/EditableCell.js'
+import recordData from "./Record/recordData.js";
+import EditableCell from "./Record/EditableCell.js";
+// import menu  from './menu.vue'
+const Menu = require("@/components/menu").default;
+import fs from "fs";
+import path from "path";
+function stopDefault( e )
+{ 
+   if ( e && e.preventDefault ) 
+      e.preventDefault(); 
+     else 
+        window.event.returnValue = false;  
+} 
+window.openFile = () =>{
+ const { shell } = require("electron").remote;
+    shell.showItemInFolder(event.target.href);
+// dialog.showOpenDialog({ properties: ['openFile', event.target.href] });
+stopDefault(event);
 
-import fs from 'fs'
-import path from 'path'
-
-
-
-const { MayPane, JunePane, JulyPane, AugustPane, SeptemberPane, paneMap } = recordData;
+}
+const {
+  MayPane,
+  JunePane,
+  JulyPane,
+  AugustPane,
+  SeptemberPane,
+  paneMap,
+} = recordData;
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
     console.log(
       `selectedRowKeys: ${selectedRowKeys}`,
-      'selectedRows: ',
+      "selectedRows: ",
       selectedRows
     );
   },
@@ -104,97 +158,57 @@ const rowSelection = {
   },
 };
 
-
-
-const columns = [{
-    title: '期数',
-    dataIndex: 'index',
-    key: 'index',
-  },
-  {
-    title: '还款时间',
-    dataIndex: 'date',
-    key: 'date',
-  },
-  {
-    title: '还款本金',
-    dataIndex: 'sum',
-    key: 'sum',
-  },
-  {
-    title: '还款利息',
-    dataIndex: 'fee',
-    key: 'fee',
-  },
-  {
-    title: '提前还款额',
-    dataIndex: 'allSum',
-    key: 'allSum',
-  },
-  {
-    title: '实际利率(%)',
-    dataIndex: 'rate',
-    key: 'rate',
-  },
-];
-
-const data = [{
-  index: 1,
-  date: '2021/2/10',
-  sum: 23667,
-  fee: 4970,
-  allSum: 1420000 - 23667 + 4970,
-  rate: ((4970 + 4970) / 1420000) * 12 * 100,
-}, ];
-
-
-
 export default {
-  name: 'record',
+  name: "record",
   components: {
     EditableCell,
+    Menu,
   },
   data() {
     return {
+      rightShow: true,
       mainPane: AugustPane,
       total: 1420000,
-      tabPosition: 'left',
+      tabPosition: "left",
       fee: 4970,
       month: null,
       activeKey: 1,
       rowSelection,
-      dataSource: [{
-        key: '1',
-        name: '1',
-        age: '记录',
-        address: '补充',
-      }],
+      dataSource: [
+        {
+          key: "1",
+          name: "1",
+          age: "记录",
+          address: "补充",
+        },
+      ],
       count: 3,
-      columns: [{
-          title: '',
-          dataIndex: 'key',
-          width: '5%',
-          scopedSlots: { customRender: 'key' },
+      columns: [
+        {
+          title: "",
+          dataIndex: "key",
+          width: "5%",
+          scopedSlots: { customRender: "key" },
         },
         {
-          title: '记录整理',
-          dataIndex: 'age',
-          width: '60%',
+          title: "记录整理",
+          dataIndex: "age",
+          width: "60%",
 
-          scopedSlots: { customRender: 'age' },
+          scopedSlots: { customRender: "age" },
         },
         {
-          title: '补充',
-          dataIndex: 'address',
-          width: '27%',
+          title: "补充",
+          dataIndex: "address",
+          width: "27%",
 
-          scopedSlots: { customRender: 'address' },
+          scopedSlots: { customRender: "address" },
         },
         {
-          title: '操作',
-          dataIndex: 'operation',
-          width: '10%',
-          scopedSlots: { customRender: 'operation' },
+          title: "",
+          dataIndex: "operation",
+          width: "10%",
+          scopedSlots: { customRender: "operation" },
         },
       ],
     };
@@ -202,34 +216,37 @@ export default {
   methods: {
     goBack() {
       // window.history.back();
-      this.$router.push('/month')
+      this.$router.push("/month");
+    },
+    switchShow() {
+      this.rightShow = !this.rightShow;
     },
     dataHandle(info) {
-      var filePath =
-        info.file.path;
-      let fileData = fs.readFileSync(filePath, 'utf8')
+      var filePath = info.file.path;
+      let fileData = fs.readFileSync(filePath, "utf8");
       try {
         fileData = JSON.parse(fileData);
-        localStorage.setItem('data' + this.month, JSON.stringify(fileData['data' + this.month]));
+        localStorage.setItem(
+          "data" + this.month,
+          JSON.stringify(fileData["data" + this.month])
+        );
 
         this.mainPane = [];
-        setTimeout(() => { this.mainPane = fileData['data' + this.month]; }, 1)
+        setTimeout(() => {
+          this.mainPane = fileData["data" + this.month];
+        }, 1);
 
         this.$message.success(filePath + `  文件已导入 `);
-
       } catch (error) {
-        this.$message.error('文件格式错误,请重新选择');
-
+        this.$message.error("文件格式错误,请重新选择");
       }
       return;
-
     },
     handleImport(info) {
       return;
       // let fileContents = fs.readFileSync(path.resolve(__static, '../output.js'), 'utf8')
 
       // console.log(fileContents);
-
 
       // if (info.file.status !== 'uploading') {
       //   console.log(info.file, info.fileList);
@@ -241,36 +258,38 @@ export default {
       // }
     },
     handleOutput() {
-      let filePath = path.join(__static, '../output.js');
+      let filePath = path.join(__static, "../output.js");
       let tempData = {};
 
       fs.exists(filePath, (exists) => {
         if (exists) {
-          var fileData = fs.readFileSync(filePath, 'utf8');
+          var fileData = fs.readFileSync(filePath, "utf8");
           if (fileData) {
             fileData = JSON.parse(fileData);
 
-            fileData['data' + this.month] = JSON.parse(localStorage.getItem('data' + this.month));
-            fs.writeFileSync(filePath, JSON.stringify(fileData, 'utf8'));
+            fileData["data" + this.month] = JSON.parse(
+              localStorage.getItem("data" + this.month)
+            );
+            fs.writeFileSync(filePath, JSON.stringify(fileData, "utf8"));
             this.$message.success(`文件已导出到: ` + filePath);
           } else {
-            tempData['data' + this.month] = JSON.parse(localStorage.getItem('data' + this.month));
-            fs.writeFileSync(filePath, JSON.stringify(tempData), 'utf8');
+            tempData["data" + this.month] = JSON.parse(
+              localStorage.getItem("data" + this.month)
+            );
+            fs.writeFileSync(filePath, JSON.stringify(tempData), "utf8");
             this.$message.success(`文件已导出到: ` + filePath);
           }
-
         } else {
+          tempData["data" + this.month] = JSON.parse(
+            localStorage.getItem("data" + this.month)
+          );
 
-          tempData['data' + this.month] = JSON.parse(localStorage.getItem('data' + this.month));
-
-          fs.writeFileSync(filePath, JSON.stringify(tempData), 'utf8')
+          fs.writeFileSync(filePath, JSON.stringify(tempData), "utf8");
           this.$message.success(`文件已导出到: ` + filePath);
         }
       });
-
     },
     onCellChange(key, dataIndex, mainIndex, listIndex, value) {
-
       // const dataSource = [...this.dataSource];
       const data = [...this.mainPane];
       //
@@ -281,11 +300,13 @@ export default {
       //   target[dataIndex] = value;
       //   this.dataSource = dataSource;
       // }
-      data[mainIndex].list[listIndex].dataSource[key - 1][dataIndex] = value;
-      localStorage.setItem('data' + this.month, JSON.stringify(data));
+      // debugger;
+      var tempValue = value.replace(/target="_blank" rel="noopener"/gi,`target="_blank" onclick="openFile(event)" rel="noopener"`)
+      data[mainIndex].list[listIndex].dataSource[key - 1][dataIndex] = tempValue;
+      this.$set( data[mainIndex].list[listIndex].dataSource[key - 1],dataIndex,tempValue);
+      localStorage.setItem("data" + this.month, JSON.stringify(data));
     },
     onDelete(key, mainIndex, listIndex) {
-
       // this.mainPane[mainIndex].list[listIndex].dataSource
       //
       // debugger;
@@ -296,7 +317,7 @@ export default {
       }
       dataTemp.splice(key - 1, 1);
       const data = [...dataTemp];
-      this.mainPane[mainIndex].list[listIndex].dataSource = data
+      this.mainPane[mainIndex].list[listIndex].dataSource = data;
       var te = [...this.mainPane];
       this.mainPane = [];
       // this.$nextTick(()=>{
@@ -305,8 +326,11 @@ export default {
       // })
       setTimeout(() => {
         this.mainPane = te;
-        localStorage.setItem('data' + this.month, JSON.stringify(this.mainPane));
-      }, 1)
+        localStorage.setItem(
+          "data" + this.month,
+          JSON.stringify(this.mainPane)
+        );
+      }, 1);
       // const target = dataTemp.find((item) => item.key === key);
 
       // const dataSource = [...this.dataSource];
@@ -317,21 +341,21 @@ export default {
       const { count, dataSource } = this;
       const newData = {
         key: this.mainPane[mainIndex].list[listIndex].dataSource.length + 1,
-        age: '记录',
+        age: "记录",
         address: `补充`,
       };
       this.mainPane[mainIndex].list[listIndex].dataSource.push(newData);
       const data = [...this.mainPane];
-      localStorage.setItem('data' + this.month, JSON.stringify(data));
+      localStorage.setItem("data" + this.month, JSON.stringify(data));
 
       // this.dataSource = [...dataSource, newData]
       // this.count = count + 1
     },
     pressEnter() {
       if (this.userInput == this.password) {
-        this.goPage('/overview');
+        this.goPage("/overview");
       } else {
-        this.userInput = '';
+        this.userInput = "";
       }
     },
     callback(key) {
@@ -340,79 +364,38 @@ export default {
     mainCallback(key) {
       this.activeKey = key;
     },
+openFile (e) {
+// debugger;
+dialog.showOpenDialog({ properties: ['openFile', 'C:/Users/lewei.li/Documents/Downloads/'] });
+return false;
 
+},
     onChange(e) {
       console.log(e);
-    },
-    compute(link) {
-      let lastMoney = this.total - 23667;
-      let avgMoney = (lastMoney + this.total + 23667) / 2;
-      let item = {
-        index: 1,
-        date: '2021/2/10',
-        sum: 23667,
-        fee: 4970,
-        allSum: this.total - 23667 + this.fee,
-        rate: ((4970 + this.fee) / avgMoney) * 12 * 100,
-      };
-      let itemAll = [];
-      itemAll.push({ ...item });
-      for (let i = 2; i < 5 * 12 + 1; i++) {
-        if (i == 60) {
-          let lastMoney = this.total - 23667 * 60;
-          let avgMoney = (lastMoney + this.total + 23667) / 2;
-          itemAll.push({
-            index: 60,
-            date: '2026/2/10',
-            sum: 23667,
-            fee: 4970,
-            allSum: this.total - 23667 * 60,
-            rate: ((((4970 * 60) / avgMoney) * 12) / 60) * 100,
-          });
-          continue;
-        }
-        item.index = i;
-        let dateArr = item.date.split('/');
-        if (dateArr[1] < 12) {
-          dateArr[1] = +dateArr[1] + 1;
-        } else {
-          dateArr[0] = +dateArr[0] + 1;
-          dateArr[1] = 1;
-        }
-        item.date = dateArr.join('/');
-        item.allSum = item.allSum - 23667;
-        let lastMoney = item.allSum - this.fee;
-        let avgMoney = (lastMoney + this.total + 23667) / 2;
-        let allFee = 4970 * item.index + this.fee;
-        item.rate = (((allFee / avgMoney) * 12) / item.index) * 100;
-        let tempItem = { ...item };
-        itemAll.push(tempItem);
-      }
-      this.dataSource = itemAll;
     },
   },
   mounted() {
     this.month = this.$route.query.month;
-    var data = localStorage.getItem('data' + this.month);
+    var data = localStorage.getItem("data" + this.month);
     if (data) {
-
       this.mainPane = JSON.parse(data);
-      if(!this.mainPane || this.mainPane.length == 0) {
+      if (!this.mainPane || this.mainPane.length == 0) {
         this.mainPane = paneMap[this.month];
-      localStorage.setItem('data' + this.month,JSON.stringify(this.mainPane))
+        localStorage.setItem(
+          "data" + this.month,
+          JSON.stringify(this.mainPane)
+        );
       }
-
     } else {
       this.mainPane = paneMap[this.month];
-      localStorage.setItem('data' + this.month,JSON.stringify(this.mainPane))
+      localStorage.setItem("data" + this.month, JSON.stringify(this.mainPane));
     }
-    // this.compute();
   },
 };
-
 </script>
 <style lang="scss">
 .record-page {
+  display: flex;
   margin: 20px;
   margin-left: 10px;
   margin-top: 5px;
@@ -435,9 +418,9 @@ export default {
       width: 180px;
     }
   }
-.btn-container {
-  display: flex;
-}
+  .btn-container {
+    display: flex;
+  }
   .import-btn {
     margin-right: 20px;
     margin-left: 20px;
@@ -459,17 +442,33 @@ export default {
     position: relative;
     top: -12px;
   }
-
-
-  .back-btn {
-position: fixed;
-    bottom: 3%;
+  .switch-btn {
+    position: fixed;
     /* left: 5%; */
     left: 25px;
-// float: right;
+    // float: right;
     // right: 62px;
     cursor: pointer;
     z-index: 100;
+    padding-right: 13px;
+    padding-left: 13px;
+    bottom: 7.5%;
+  }
+
+  .back-btn {
+    position: fixed;
+    bottom: 3%;
+    /* left: 5%; */
+    left: 25px;
+    // float: right;
+    // right: 62px;
+    cursor: pointer;
+    z-index: 100;
+  }
+  .menu-style {
+    flex: 1;
+    margin-top: 66px;
+    margin-left: 20px;
   }
 
   .icon-style {
@@ -492,5 +491,4 @@ position: fixed;
     border-bottom: none;
   }
 }
-
 </style>

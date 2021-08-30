@@ -12,10 +12,16 @@ export default new Router({
       component: require('@/components/LandingPage').default
     },
     {
+      path: '/TheAddressbook',
+      name: 'TheAddressbook-page',
+      component: require('@/components/TheAddressbook').default
+    },
+    {
       path: '/record',
       name: 'record',
       component: require('@/components/record').default
     },
+    
     {
       path: '/menu',
       name: 'menu',

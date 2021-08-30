@@ -19,6 +19,10 @@
     <a-button type="primary" @click="goPage('/record?month=9')">
       9月
     </a-button>
+    <div class="file-else"  style="vertical-align: middle;">
+      <b  @click="goPage('/TheAddressbook')">[通讯录]</b>
+      <b  @click="goPage('/TheAddressbook')">[甘特图]</b>
+    </div>
     <div class="file-nav">
       <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
         <a-button type="primary">
@@ -34,11 +38,12 @@
 import fs from 'fs'
 import path from 'path'
 
+
 export default {
   name: 'month',
   data() {
     return {
-
+      yourContent: null,
     }
   },
   methods: {
@@ -154,12 +159,20 @@ export default {
       width: 180px;
     }
   }
+  .file-else{
+    // width: 20%;
+    margin-top: 10%;
+    // padding-top: 15%;
+  }
 
   .file-nav {
     bottom: 25%;
     position: absolute;
     right: 15%;
-  }
+    color: #898989;
+    background-color: #ffffff;
+    border-color: #ffffff;
+ }
 
   .btn-container {
     margin-top: 21px;
