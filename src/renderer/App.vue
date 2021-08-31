@@ -40,6 +40,18 @@ export default {
 
 <style lang="scss">
 /* CSS */
+#app {
+  min-width: 950px;
+  min-height: 540px;
+  font-family:"Microsoft Yahei";
+}
+.ant-table-thead .ant-table-row-cell-break-word {
+  text-align: center;
+}
+.mce-content-body {
+    font-family:"Microsoft Yahei";
+
+}
 .test-router {
   .ant-col {
     line-height: 2;

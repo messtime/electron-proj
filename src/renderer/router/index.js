@@ -28,6 +28,11 @@ export default new Router({
       component: require('@/components/menu').default
     },
     {
+      path: '/test',
+      name: 'test',
+      component: require('@/components/test').default
+    },
+    {
       path: '/month',
       name: 'month',
       component: require('@/components/month').default

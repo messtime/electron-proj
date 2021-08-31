@@ -61,6 +61,8 @@
     "ant-design-vue": "^1.7.8",
     "axios": "^0.18.0",
     "element-ui": "^2.15.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "tinymce": "^5.9.1",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
@@ -69,7 +71,7 @@
     "vuex-electron": "^1.0.0"
   },
   "devDependencies": {
-    "@ant-design/icons": "^4.6.2",
+    "@ant-design/icons": "^4.6.4",
     "ajv": "^6.5.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",

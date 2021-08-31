@@ -120,23 +120,18 @@ import EditableCell from "./Record/EditableCell.js";
 const Menu = require("@/components/menu").default;
 import fs from "fs";
 import path from "path";
-function stopDefault( e )
-{
-   if ( e && e.preventDefault )
-      e.preventDefault();
-     else
-        window.event.returnValue = false;
-      e.stopPropagation()
-e.cancelBubble = true
+function stopDefault(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  else window.event.returnValue = false;
+  e.stopPropagation();
+  e.cancelBubble = true;
 }
-window.openFile = () =>{
- ;
- const { shell } = require("electron").remote;
-    shell.showItemInFolder(event.target.getAttribute('href'));
-// dialog.showOpenDialog({ properties: ['openFile', event.target.href] });
-stopDefault(event);
-
-}
+window.openFile = () => {
+  const { shell } = require("electron").remote;
+  shell.showItemInFolder(event.target.getAttribute("href"));
+  // dialog.showOpenDialog({ properties: ['openFile', event.target.href] });
+  stopDefault(event);
+};
 const {
   MayPane,
   JunePane,
@@ -181,8 +176,8 @@ export default {
         {
           key: "1",
           name: "1",
-          age: "记录",
-          address: "补充",
+          age: "data",
+          address: "else",
         },
       ],
       count: 3,
@@ -190,27 +185,27 @@ export default {
         {
           title: "",
           dataIndex: "key",
-          width: "5%",
+          width: "10%",
           scopedSlots: { customRender: "key" },
         },
         {
           title: "记录整理",
           dataIndex: "age",
-          width: "60%",
+          width: "53%",
 
           scopedSlots: { customRender: "age" },
         },
         {
           title: "补充",
           dataIndex: "address",
-          width: "27%",
+          width: "34%",
 
           scopedSlots: { customRender: "address" },
         },
         {
           title: "",
           dataIndex: "operation",
-          width: "10%",
+          width: "3%",
           scopedSlots: { customRender: "operation" },
         },
       ],
@@ -304,9 +299,12 @@ export default {
       //   this.dataSource = dataSource;
       // }
       //;
-     ;
       data[mainIndex].list[listIndex].dataSource[key - 1][dataIndex] = value;
-      this.$set( data[mainIndex].list[listIndex].dataSource[key - 1],dataIndex,value);
+      this.$set(
+        data[mainIndex].list[listIndex].dataSource[key - 1],
+        dataIndex,
+        value
+      );
       localStorage.setItem("data" + this.month, JSON.stringify(data));
     },
     onDelete(key, mainIndex, listIndex) {
@@ -344,8 +342,8 @@ export default {
       const { count, dataSource } = this;
       const newData = {
         key: this.mainPane[mainIndex].list[listIndex].dataSource.length + 1,
-        age: "记录",
-        address: `补充`,
+        age: "data",
+        address: `else`,
       };
       this.mainPane[mainIndex].list[listIndex].dataSource.push(newData);
       const data = [...this.mainPane];
@@ -367,12 +365,13 @@ export default {
     mainCallback(key) {
       this.activeKey = key;
     },
-openFile (e) {
-//;
-dialog.showOpenDialog({ properties: ['openFile', 'C:/Users/lewei.li/Documents/Downloads/'] });
-return false;
-
-},
+    openFile(e) {
+      //;
+      dialog.showOpenDialog({
+        properties: ["openFile", "C:/Users/lewei.li/Documents/Downloads/"],
+      });
+      return false;
+    },
     onChange(e) {
       console.log(e);
     },
@@ -443,7 +442,7 @@ return false;
   .editable-cell-text-wrapper {
     white-space: pre-line;
     position: relative;
-    top: -12px;
+    // top: -12px;
   }
   .switch-btn {
     position: fixed;
@@ -455,12 +454,12 @@ return false;
     z-index: 100;
     padding-right: 13px;
     padding-left: 13px;
-    bottom: 7.5%;
+    bottom: 62px;
   }
 
   .back-btn {
     position: fixed;
-    bottom: 3%;
+    bottom: 15px;
     /* left: 5%; */
     left: 25px;
     // float: right;

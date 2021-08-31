@@ -55,10 +55,23 @@
               />
             </template>
             <template slot="city" slot-scope="text, record">
-              <editable-cell
+              <!-- <editable-cell
                 :text="text"
                 @change="onCellChange(record.key, 'city', $event, 2)"
-              />
+              /> -->
+              <a-select
+                default-value=""
+                style="width:70px;"
+                @change="handleChange"
+              >
+                <a-select-option
+                  v-for="(item, index) in cityData"
+                  :value="item"
+                  :key="index"
+                >
+                  {{ item }}
+                </a-select-option>
+              </a-select>
             </template>
             <template slot="address" slot-scope="text, record">
               <editable-cell
@@ -67,10 +80,23 @@
               />
             </template>
             <template slot="type" slot-scope="text, record">
-              <editable-cell
+              <!-- <editable-cell
                 :text="text"
                 @change="onCellChange(record.key, 'type', $event, 2)"
-              />
+              /> -->
+              <a-select
+                default-value=""
+                style="width:150px;"
+                @change="handleChange"
+              >
+                <a-select-option
+                  v-for="(item, index) in typeData"
+                  :value="item"
+                  :key="index"
+                >
+                  {{ item }}
+                </a-select-option>
+              </a-select>
             </template>
             <template slot="contact" slot-scope="text, record">
               <editable-cell
@@ -109,7 +135,7 @@
 </template>
 <script>
 import recordData from "./Record/recordData.js";
-import EditableCell from "./Record/EditSimple.js";
+import EditableCell from "./Record/EditSimpleDbl.js";
 import fs from "fs";
 import path from "path";
 
@@ -133,22 +159,42 @@ export default {
   data() {
     return {
       rowSelection,
+      cityData: [
+        "武汉",
+        "黄石",
+        "十堰",
+        "宜昌",
+        "襄阳",
+        "鄂州",
+        "荆门",
+        "孝感",
+        "荆州",
+        "黄冈",
+        "咸宁",
+        "随州",
+      ],
+      typeData: [
+        "新开发个人",
+        "已在合作个人",
+        "新开发电梯公司",
+        "已在合作电梯公司",
+      ],
       dataSource1: [
         {
           key: "1",
           name: "1",
-          age: "记录",
-          phone: "补充",
-          boss: "补充",
-          part: "补充",
+          age: "data",
+          phone: "data",
+          boss: "data",
+          part: "data",
         },
       ],
       dataSource2: [
         {
           key: "1",
           name: "1",
-          age: "记录",
-          address: "补充",
+          age: "data",
+          address: "data",
           phone: "",
           contact: "",
           type: "",
@@ -157,100 +203,101 @@ export default {
       ],
       count: 3,
       columns1: [
-        {
-          title: "",
-          dataIndex: "key",
-          width: "5%",
-          scopedSlots: { customRender: "key" },
-        },
+        // {
+        //   title: "",
+        //   dataIndex: "key",
+        //   width: "5%",
+        //   scopedSlots: { customRender: "key" },
+        // },
         {
           title: "姓名",
           dataIndex: "age",
-          width: "60%",
+          width: "18%",
 
           scopedSlots: { customRender: "age" },
         },
         {
           title: "部门",
           dataIndex: "part",
-          width: "27%",
+          width: "31%",
 
           scopedSlots: { customRender: "part" },
         },
         {
           title: "移动电话",
           dataIndex: "phone",
-          width: "27%",
+          width: "33%",
 
           scopedSlots: { customRender: "phone" },
         },
         {
           title: "直接上级",
           dataIndex: "boss",
-          width: "27%",
+          width: "15%",
 
           scopedSlots: { customRender: "boss" },
         },
         {
           title: "",
           dataIndex: "operation",
-          width: "10%",
+          width: "3%",
           scopedSlots: { customRender: "operation" },
         },
       ],
       columns2: [
-        {
-          title: "",
-          dataIndex: "key",
-          width: "5%",
-          scopedSlots: { customRender: "key" },
-        },
+        // {
+        //   title: "",
+        //   dataIndex: "key",
+        //   width: "5%",
+        //   scopedSlots: { customRender: "key" },
+        // },
         {
           title: "全称",
           dataIndex: "age",
-          width: "60%",
-
+          width: "22%",
+          // fixed: 'left',
           scopedSlots: { customRender: "age" },
         },
         {
           title: "地级市",
           dataIndex: "city",
-          width: "27%",
+          width: "10%",
 
           scopedSlots: { customRender: "city" },
         },
+
         {
           title: "经营地址",
           dataIndex: "address",
-          width: "27%",
+          width: "23%",
 
           scopedSlots: { customRender: "address" },
         },
         {
           title: "分类",
           dataIndex: "type",
-          width: "27%",
+          width: "10%",
 
           scopedSlots: { customRender: "type" },
         },
         {
-          title: "主要联系",
+          title: "主要联系人",
           dataIndex: "contact",
-          width: "27%",
+          width: "15%",
 
           scopedSlots: { customRender: "contact" },
         },
         {
           title: "联系电话",
           dataIndex: "phone",
-          width: "27%",
-
+          width: "22%",
+          // fixed: 'right',
           scopedSlots: { customRender: "phone" },
         },
         {
           title: "",
           dataIndex: "operation",
-          width: "10%",
+          width: "3%",
           scopedSlots: { customRender: "operation" },
         },
       ],
@@ -262,6 +309,9 @@ export default {
   methods: {
     callback(key) {
       console.log(key);
+    },
+    handleChange(value) {
+      console.log(`selected ${value}`);
     },
     onCellChange(key, field, value, type) {
       if (type == 1) {
@@ -280,9 +330,10 @@ export default {
         }
         dataTemp.splice(key - 1, 1);
         const data = [...dataTemp];
-        this.dataSource1 = data;
 
         setTimeout(() => {
+          this.dataSource1 = data;
+
           localStorage.setItem("company", JSON.stringify(this.dataSource1));
         }, 1);
       } else {
@@ -292,9 +343,11 @@ export default {
         }
         dataTemp.splice(key - 1, 1);
         const data = [...dataTemp];
-        this.dataSource2 = data;
+        this.dataSource2 = [];
 
         setTimeout(() => {
+                  this.dataSource2 = data;
+
           localStorage.setItem("agent", JSON.stringify(this.dataSource2));
         }, 1);
       }
@@ -305,10 +358,10 @@ export default {
       if (type == 1) {
         newData = {
           key: this.dataSource1.length + 1,
-          age: "记录",
-          phone: "补充",
-          boss: "补充",
-          part: "补充",
+          age: "data",
+          phone: "else",
+          boss: "else",
+          part: "else",
         };
         this.dataSource1.push(newData);
         localStorage.setItem("company", JSON.stringify(this.dataSource1));
@@ -316,8 +369,8 @@ export default {
         newData = {
           key: this.dataSource2.length + 1,
           name: "1",
-          age: "记录",
-          address: "补充",
+          age: "data",
+          address: "else",
           phone: "",
           contact: "",
           type: "",
@@ -335,17 +388,34 @@ export default {
 };
 </script>
 <style lang="scss">
-.tab-title {
-  width: 80%;
+.ant-select-dropdown-menu .ant-select-dropdown-menu-item {
+  font-size: 14px !important;
 }
-.back-btn {
-  position: fixed;
-  bottom: 3%;
-  /* left: 5%; */
-  left: 25px;
-  // float: right;
-  // right: 62px;
-  cursor: pointer;
-  z-index: 100;
+.tab-title {
+  .ant-table-row-cell-break-word {
+  text-align: center;
+}
+  .ant-tabs {
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+  .ant-select-selection-selected-value {
+    font-size: 14px !important;
+  }
+  .back-btn {
+    position: fixed;
+    /* left: 5%; */
+    left: 25px;
+    // float: right;
+    // right: 62px;
+    cursor: pointer;
+    z-index: 100;
+    bottom: 15px;
+  }
+  .ant-tabs-nav .ant-tabs-tab-active {
+    text-shadow: none;
+    font-weight: bold;
+    font-size: 18px;
+  }
 }
 </style>

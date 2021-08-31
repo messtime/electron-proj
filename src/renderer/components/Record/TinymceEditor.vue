@@ -15,67 +15,71 @@
 
 <script>
 // 引入组件
-import tinymce from 'tinymce/tinymce'
-import Editor from '@tinymce/tinymce-vue'
+import tinymce from "tinymce/tinymce";
+import Editor from "@tinymce/tinymce-vue";
 
-import 'tinymce/icons/default/icons' // 解决了icons.js 报错Unexpected token '<'
+import "tinymce/icons/default/icons"; // 解决了icons.js 报错Unexpected token '<'
 // 引入富文本编辑器主题的js和css
-import 'tinymce/themes/silver/theme.min.js'
-import '/static/tinymce/skins/ui/oxide/skin.min.css'
+import "tinymce/themes/silver/theme.min.js";
+import "/static/tinymce/skins/ui/oxide/skin.min.css";
 // 扩展插件
-import 'tinymce/plugins/link'
-import 'tinymce/plugins/lists'
-import 'tinymce/plugins/image'
-import 'tinymce/plugins/code'
-import 'tinymce/plugins/table'
-import 'tinymce/plugins/wordcount'
-import 'tinymce/plugins/wordcount'
-import 'tinymce/plugins/autolink'
+import "tinymce/plugins/link";
+import "tinymce/plugins/lists";
+import "tinymce/plugins/image";
+import "tinymce/plugins/code";
+import "tinymce/plugins/table";
+import "tinymce/plugins/wordcount";
+import "tinymce/plugins/wordcount";
+import "tinymce/plugins/autolink";
 
 export default {
-  name: 'TinyMCE',
+  name: "TinyMCE",
   components: {
-    Editor
+    Editor,
   },
   props: {
     id: {
       type: String,
-      default: 'tinymceEditor'
+      default: "tinymceEditor",
     },
     value: {
       type: String,
-      default: ''
+      default: "",
     },
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  data ()
- {
+  data() {
     return {
       // 编辑器初始化配置
       editorInit: {
-        selector: '#tinymce', // 容器
+        selector: "#tinymce", // 容器
 
-        language_url: '/static/tinymce/langs/zh_CN.js',
-        language: 'zh_CN',
-        skin_url: '/static/tinymce/skins/ui/oxide', // 主题
+        language_url: "/static/tinymce/langs/zh_CN.js",
+        language: "zh_CN",
+        skin_url: "/static/tinymce/skins/ui/oxide", // 主题
         height: 300,
-            plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern help emoticons autosave bdmap indent2em autoresize formatpainter axupimgs',
+        plugins:
+          "print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern help emoticons autosave bdmap indent2em autoresize formatpainter axupimgs",
 
         // plugins: 'link lists image code table wordcount', // 用到的插件：链接、列表、图片、代码块、表格、字数
-        toolbar: 'undo redo | bold italic underline strikethrough | formatselect fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | link unlink table image | removeformat',
-    //     toolbar: `code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | \
-    // styleselect formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat | \
-    // table image media charmap emoticons hr pagebreak insertdatetime print preview | fullscreen | bdmap indent2em lineheight formatpainter axupimgs`,
+        toolbar:
+          "undo redo | bold italic underline strikethrough | formatselect fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | link unlink table image | removeformat",
+        //     toolbar: `code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | \
+        // styleselect formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat | \
+        // table image media charmap emoticons hr pagebreak insertdatetime print preview | fullscreen | bdmap indent2em lineheight formatpainter axupimgs`,
 
-        fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
-    font_formats: '微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;',
+        fontsize_formats: "12px 14px 16px 18px 24px 36px 48px 56px 72px",
+        font_formats:
+          "微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;",
+
+        // 苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;
 
         // 工具栏
-        images_upload_base_path: 'http://admin.secminddev.com', // 上传图片基础路径
-        images_upload_url: '/api/dfs/resourceinfo/webUpload', // 上传图片地址
+        images_upload_base_path: "http://admin.secminddev.com", // 上传图片基础路径
+        images_upload_url: "/api/dfs/resourceinfo/webUpload", // 上传图片地址
         // images_upload_handler: (blobInfo, success, failure) => { // 图片上传
         //   console.log(blobInfo, success, failure, '上传图片====--==-')
         //   const img = `data:${blobInfo.blob().type};base64,${blobInfo.base64()}`
@@ -86,23 +90,23 @@ export default {
         menubar: false, // 最上方的菜单
         branding: false, // 水印“Powered by TinyMCE”
         max_height: 500,
-        min_height: 300
-      }
-    }
+        min_height: 300,
+      },
+    };
   },
   computed: {
     tinymceHtml: () => {
-      return this.value
-    }
+      return this.value;
+    },
   },
-  mounted () {
-    tinymce.init({})
+  mounted() {
+    tinymce.init({});
   },
   methods: {
-    handleChange (e, editor) {
-      console.log(e, editor, '===change事件')
-      this.$emit('editorChange', e, editor)
-    }
+    handleChange(e, editor) {
+      console.log(e, editor, "===change事件");
+      this.$emit("editorChange", e, editor);
+    },
     // 图片上传
     // handleImgUpload (blobInfo, success, failure) {
     //   this.baseUrl = process.env.VUE_APP_BASE_URL
@@ -113,13 +117,13 @@ export default {
     //     success(`${this.baseUrl}/${res.data[0]}`)
     //   }).catch(() => { failure('error') })
     // }
-  }
-}
+  },
+};
 </script>
 
 <style lang="less" scoped>
-.TinyMCE{
-  .preview{
+.TinyMCE {
+  .preview {
     min-height: 200px;
     max-height: 400px;
     overflow-y: auto;
