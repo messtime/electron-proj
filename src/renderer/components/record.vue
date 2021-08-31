@@ -130,7 +130,7 @@ function stopDefault( e )
 e.cancelBubble = true
 }
 window.openFile = () =>{
-  debugger;
+ ;
  const { shell } = require("electron").remote;
     shell.showItemInFolder(event.target.getAttribute('href'));
 // dialog.showOpenDialog({ properties: ['openFile', event.target.href] });
@@ -303,8 +303,8 @@ export default {
       //   target[dataIndex] = value;
       //   this.dataSource = dataSource;
       // }
-      // debugger;
-      debugger;
+      //;
+     ;
       data[mainIndex].list[listIndex].dataSource[key - 1][dataIndex] = value;
       this.$set( data[mainIndex].list[listIndex].dataSource[key - 1],dataIndex,value);
       localStorage.setItem("data" + this.month, JSON.stringify(data));
@@ -312,7 +312,7 @@ export default {
     onDelete(key, mainIndex, listIndex) {
       // this.mainPane[mainIndex].list[listIndex].dataSource
       //
-      // debugger;
+      //;
       // const data = [...this.mainPane];
       var dataTemp = this.mainPane[mainIndex].list[listIndex].dataSource;
       for (let i = dataTemp.length; i > key; i--) {
@@ -368,7 +368,7 @@ export default {
       this.activeKey = key;
     },
 openFile (e) {
-// debugger;
+//;
 dialog.showOpenDialog({ properties: ['openFile', 'C:/Users/lewei.li/Documents/Downloads/'] });
 return false;
 

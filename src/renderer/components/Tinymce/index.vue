@@ -128,7 +128,7 @@ export default {
       });
     },
     initTinymce() {
-      debugger;
+      // debugger;
       const _this = this;
       window.tinymce.init({
         selector: `#${this.tinymceId}`,
