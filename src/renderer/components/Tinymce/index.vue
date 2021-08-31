@@ -128,6 +128,7 @@ export default {
       });
     },
     initTinymce() {
+      debugger;
       const _this = this;
       window.tinymce.init({
         selector: `#${this.tinymceId}`,
@@ -137,6 +138,7 @@ export default {
         object_resizing: false,
         toolbar: this.toolbar.length > 0 ? this.toolbar : toolbar,
         menubar: this.menubar,
+        base_url: '/static/tinymce/',
         plugins: plugins,
         end_container_on_empty_block: true,
         powerpaste_word_import: "clean",

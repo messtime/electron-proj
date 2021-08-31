@@ -121,15 +121,18 @@ const Menu = require("@/components/menu").default;
 import fs from "fs";
 import path from "path";
 function stopDefault( e )
-{ 
-   if ( e && e.preventDefault ) 
-      e.preventDefault(); 
-     else 
-        window.event.returnValue = false;  
-} 
+{
+   if ( e && e.preventDefault )
+      e.preventDefault();
+     else
+        window.event.returnValue = false;
+      e.stopPropagation()
+e.cancelBubble = true
+}
 window.openFile = () =>{
+  debugger;
  const { shell } = require("electron").remote;
-    shell.showItemInFolder(event.target.href);
+    shell.showItemInFolder(event.target.getAttribute('href'));
 // dialog.showOpenDialog({ properties: ['openFile', event.target.href] });
 stopDefault(event);
 
@@ -301,9 +304,9 @@ export default {
       //   this.dataSource = dataSource;
       // }
       // debugger;
-      var tempValue = value.replace(/target="_blank" rel="noopener"/gi,`target="_blank" onclick="openFile(event)" rel="noopener"`)
-      data[mainIndex].list[listIndex].dataSource[key - 1][dataIndex] = tempValue;
-      this.$set( data[mainIndex].list[listIndex].dataSource[key - 1],dataIndex,tempValue);
+      debugger;
+      data[mainIndex].list[listIndex].dataSource[key - 1][dataIndex] = value;
+      this.$set( data[mainIndex].list[listIndex].dataSource[key - 1],dataIndex,value);
       localStorage.setItem("data" + this.month, JSON.stringify(data));
     },
     onDelete(key, mainIndex, listIndex) {

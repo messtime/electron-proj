@@ -25,7 +25,9 @@ export default {
   methods: {
     handleChange(e) {
       const value = e.target.value;
-      this.value = value;
+      var tempValue = value.replace(/target="_file">/,`target="_blank" onclick="openFile(event)">`)
+
+      this.value = tempValue;
     },
     addNewLine(e) {
       // 1.获取光标位置
