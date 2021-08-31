@@ -54,6 +54,7 @@ export default {
       // 编辑器初始化配置
       editorInit: {
         selector: '#tinymce', // 容器
+
         language_url: '/static/tinymce/langs/zh_CN.js',
         language: 'zh_CN',
         skin_url: '/static/tinymce/skins/ui/oxide', // 主题
@@ -61,6 +62,7 @@ export default {
         plugins: 'link lists image code table wordcount', // 用到的插件：链接、列表、图片、代码块、表格、字数
         toolbar: 'undo redo | bold italic underline strikethrough | formatselect fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | link unlink table image | removeformat',
         fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
+
         // 工具栏
         images_upload_base_path: 'http://admin.secminddev.com', // 上传图片基础路径
         images_upload_url: '/api/dfs/resourceinfo/webUpload', // 上传图片地址

@@ -136,7 +136,7 @@
       if (skin) {
         var skinUrlBase = getSkinUrl(editor);
         var skinUrl = skinUrlBase ? editor.documentBaseURI.toAbsolute(skinUrlBase) : global$2.baseURL + '/skins/ui/' + skin;
-        var contentSkinUrlPart = global$2.baseURL + '/skins/content/';
+        var contentSkinUrlPart = global$2.baseURL + '/static/tinymce/skins/content/';
         return href === skinUrl + '/content' + (editor.inline ? '.inline' : '') + '.min.css' || href.indexOf(contentSkinUrlPart) !== -1;
       }
       return false;

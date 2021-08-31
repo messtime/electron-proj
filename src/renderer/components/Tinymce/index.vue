@@ -146,12 +146,12 @@ export default {
         advlist_number_styles: "default",
         imagetools_cors_hosts: ["www.tinymce.com", "codepen.io"],
         default_link_target: "_blank",
-        target_list: [
-          { title: "新窗口", value: "_blank" },
-          { title: "Table of contents", value: "toc" },
-          { title: "Lightbox", value: "_lightbox" },
-          { title: "当前窗口", value: "" },
-        ],
+        // target_list: [
+        //   { title: "新窗口", value: "_blank" },
+        //   { title: "Table of contents", value: "toc" },
+        //   { title: "Lightbox", value: "_lightbox" },
+        //   { title: "当前窗口", value: "" },
+        // ],
         link_title: false,
         nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
         init_instance_callback: (editor) => {

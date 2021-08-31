@@ -1,4 +1,4 @@
-var time = null;  //  在这里定义time 为null 
+var time = null;  //  在这里定义time 为null
 
 export default {
   template: `

@@ -29,19 +29,19 @@ export default {
       // 1.获取光标位置
       const ele = e.target
       const cursorIndex = ele.selectionStart
- 
+
       // 2.光标后加入换行符
       let temp_text = this.value.split('')
       temp_text.splice(cursorIndex, 0, '\n')
       this.value = temp_text.join('')
- 
+
       // 3.移动光标
       this.$nextTick(() => {
         ele.selectionStart = ele.selectionEnd = cursorIndex + 1
       })
     },
     keydown(e) {
-      
+
       if(e.altKey && e.keyCode  == 13) {
       //  this.value += '\n';
       //  this.value = this.value +'\n';
