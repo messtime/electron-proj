@@ -5,35 +5,19 @@
         <div>
           <a-table bordered :data-source="dataSource1" :columns="columns1">
             <template slot="age" slot-scope="text, record">
-              <editable-cell
-                :text="text"
-                @change="onCellChange(record.key, 'age', $event, 1)"
-              />
+              <editable-cell :text="text" @change="onCellChange(record.key, 'age', $event, 1)" />
             </template>
             <template slot="part" slot-scope="text, record">
-              <editable-cell
-                :text="text"
-                @change="onCellChange(record.key, 'part', $event, 1)"
-              />
+              <editable-cell :text="text" @change="onCellChange(record.key, 'part', $event, 1)" />
             </template>
             <template slot="phone" slot-scope="text, record">
-              <editable-cell
-                :text="text"
-                @change="onCellChange(record.key, 'phone', $event, 1)"
-              />
+              <editable-cell :text="text" @change="onCellChange(record.key, 'phone', $event, 1)" />
             </template>
             <template slot="boss" slot-scope="text, record">
-              <editable-cell
-                :text="text"
-                @change="onCellChange(record.key, 'boss', $event, 1)"
-              />
+              <editable-cell :text="text" @change="onCellChange(record.key, 'boss', $event, 1)" />
             </template>
             <template slot="operation" slot-scope="text, record">
-              <a-popconfirm
-                v-if="dataSource1"
-                title="Sure to delete?"
-                @confirm="() => onDelete(record.key, 1)"
-              >
+              <a-popconfirm v-if="dataSource1" title="Sure to delete?" @confirm="() => onDelete(record.key, 1)">
                 <a href="javascript:;">X</a>
               </a-popconfirm>
             </template>
@@ -45,77 +29,45 @@
           </a-table>
         </div>
       </a-tab-pane>
-      <a-tab-pane key="2" tab="代理商" force-render>
+      <a-tab-pane key="2" tab="代理商">
         <div>
           <a-table bordered :data-source="dataSource2" :columns="columns2">
             <template slot="age" slot-scope="text, record">
-              <editable-cell
-                :text="text"
-                @change="onCellChange(record.key, 'age', $event, 2)"
-              />
+              <editable-cell :text="text" @change="onCellChange(record.key, 'age', $event, 2)" />
             </template>
             <template slot="city" slot-scope="text, record">
               <!-- <editable-cell
                 :text="text"
                 @change="onCellChange(record.key, 'city', $event, 2)"
               /> -->
-              <a-select
-                default-value=""
-                style="width:70px;"
-                @change="handleChange"
-              >
-                <a-select-option
-                  v-for="(item, index) in cityData"
-                  :value="item"
-                  :key="index"
-                >
+              <a-select :default-value="record.city" style="width:70px;" @change="handleChange">
+                <a-select-option v-for="(item, index) in cityData" :value="item" :key="index">
                   {{ item }}
                 </a-select-option>
               </a-select>
             </template>
             <template slot="address" slot-scope="text, record">
-              <editable-cell
-                :text="text"
-                @change="onCellChange(record.key, 'address', $event, 2)"
-              />
+              <editable-cell :text="text" @change="onCellChange(record.key, 'address', $event, 2)" />
             </template>
             <template slot="type" slot-scope="text, record">
-              <!-- <editable-cell
+              <editable-cell
                 :text="text"
                 @change="onCellChange(record.key, 'type', $event, 2)"
-              /> -->
-              <a-select
-                default-value=""
-                style="width:150px;"
-                @change="handleChange"
-              >
-                <a-select-option
-                  v-for="(item, index) in typeData"
-                  :value="item"
-                  :key="index"
-                >
+              />
+              <a-select default-value="" :value="record.type"  style="width:150px;" @change="handleChange">
+                <a-select-option v-for="(item, index) in typeData" :value="item" :key="index">
                   {{ item }}
                 </a-select-option>
               </a-select>
             </template>
             <template slot="contact" slot-scope="text, record">
-              <editable-cell
-                :text="text"
-                @change="onCellChange(record.key, 'contact', $event, 2)"
-              />
+              <editable-cell :text="text" @change="onCellChange(record.key, 'contact', $event, 2)" />
             </template>
             <template slot="phone" slot-scope="text, record">
-              <editable-cell
-                :text="text"
-                @change="onCellChange(record.key, 'phone', $event, 2)"
-              />
+              <editable-cell :text="text" @change="onCellChange(record.key, 'phone', $event, 2)" />
             </template>
             <template slot="operation" slot-scope="text, record">
-              <a-popconfirm
-                v-if="dataSource2.length"
-                title="Sure to delete?"
-                @confirm="() => onDelete(record.key, 2)"
-              >
+              <a-popconfirm v-if="dataSource2.length" title="Sure to delete?" @confirm="() => onDelete(record.key, 2)">
                 <a href="javascript:;">X</a>
               </a-popconfirm>
             </template>
@@ -179,28 +131,24 @@ export default {
         "新开发电梯公司",
         "已在合作电梯公司",
       ],
-      dataSource1: [
-        {
-          key: "1",
-          name: "1",
-          age: "data",
-          phone: "data",
-          boss: "data",
-          part: "data",
-        },
-      ],
-      dataSource2: [
-        {
-          key: "1",
-          name: "1",
-          age: "data",
-          address: "data",
-          phone: "",
-          contact: "",
-          type: "",
-          city: "",
-        },
-      ],
+      dataSource1: [{
+        key: "1",
+        name: "1",
+        age: "data",
+        phone: "data",
+        boss: "data",
+        part: "data",
+      }, ],
+      dataSource2: [{
+        key: "1",
+        name: "1",
+        age: "data",
+        address: "data",
+        phone: "",
+        contact: "",
+        type: "",
+        city: "",
+      }, ],
       count: 3,
       columns1: [
         // {
@@ -310,8 +258,10 @@ export default {
     callback(key) {
       console.log(key);
     },
-    handleChange(value) {
-      console.log(`selected ${value}`);
+    handleChange(field, key) {
+
+      // this.dataSource2[key - 1][field] = value;
+
     },
     onCellChange(key, field, value, type) {
       if (type == 1) {
@@ -346,7 +296,7 @@ export default {
         this.dataSource2 = [];
 
         setTimeout(() => {
-                  this.dataSource2 = data;
+          this.dataSource2 = data;
 
           localStorage.setItem("agent", JSON.stringify(this.dataSource2));
         }, 1);
@@ -385,23 +335,75 @@ export default {
       this.$router.push("/month");
     },
   },
-};
+  mounted() {
+    var company = localStorage.getItem("company");
+
+    var agent = localStorage.getItem("agent");
+
+    if (company) {
+      company = JSON.parse(company);
+      if (company.length == 0) {
+        localStorage.setItem(
+          "company",
+          JSON.stringify(this.dataSource2)
+        );
+      } else {
+        this.dataSource1 = [];
+        setTimeout(() => {
+
+          this.dataSource1 = company;
+        }, 1)
+      }
+    } else {
+      localStorage.setItem(
+        "company",
+        JSON.stringify(this.dataSource1)
+      );
+    }
+
+    if (agent) {
+      agent = JSON.parse(agent);
+      if (agent.length == 0) {
+        localStorage.setItem(
+          "agent",
+          JSON.stringify(this.dataSource2)
+        );
+      } else {
+        this.dataSource2 = [];
+        setTimeout(() => {
+          this.dataSource2 = agent;
+
+        }, 1)
+      }
+    } else {
+      localStorage.setItem(
+        "agent",
+        JSON.stringify(this.dataSource2)
+      );
+    }
+  }
+}
+
 </script>
 <style lang="scss">
 .ant-select-dropdown-menu .ant-select-dropdown-menu-item {
   font-size: 14px !important;
 }
+
 .tab-title {
   .ant-table-row-cell-break-word {
-  text-align: center;
-}
+    text-align: center;
+  }
+
   .ant-tabs {
     margin-left: 25px;
     margin-right: 25px;
   }
+
   .ant-select-selection-selected-value {
     font-size: 14px !important;
   }
+
   .back-btn {
     position: fixed;
     /* left: 5%; */
@@ -412,10 +414,12 @@ export default {
     z-index: 100;
     bottom: 15px;
   }
+
   .ant-tabs-nav .ant-tabs-tab-active {
     text-shadow: none;
     font-weight: bold;
     font-size: 18px;
   }
 }
+
 </style>

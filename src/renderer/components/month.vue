@@ -24,12 +24,7 @@
       <!-- <b class="gtt-btn" @click="goPage('/TheAddressbook')">[甘特图]</b> -->
     </div>
     <div class="file-nav">
-      <a-upload
-        name="file"
-        :customRequest="dataHandle"
-        :showUploadList="false"
-        @change="handleImport"
-      >
+      <a-upload name="file" :customRequest="dataHandle" :showUploadList="false" @change="handleImport">
         <a-button type="primary"> Import</a-button>
       </a-upload>
       <a-button type="primary" @click="handleOutput">
@@ -58,8 +53,17 @@ export default {
       let fileData = fs.readFileSync(filePath, "utf8");
       try {
         let temp = JSON.parse(fileData);
+
         Object.keys(temp).forEach((item) => {
-          localStorage.setItem(item, JSON.stringify(temp[item]));
+          // debugger;
+          if (typeof temp[item] === 'string') {
+            localStorage.setItem(item, temp[item]);
+
+          } else {
+            localStorage.setItem(item, JSON.stringify(temp[item]));
+
+          }
+          // localStorage.setItem(item, JSON.stringify(temp[item]));
         });
         this.$message.success(filePath + `  文件已导入 `);
       } catch (error) {
@@ -91,9 +95,9 @@ export default {
           if (new RegExp("(" + k + ")").test(fmt)) {
             fmt = fmt.replace(
               RegExp.$1,
-              RegExp.$1.length == 1
-                ? o[k]
-                : ("00" + o[k]).substr(("" + o[k]).length)
+              RegExp.$1.length == 1 ?
+              o[k] :
+              ("00" + o[k]).substr(("" + o[k]).length)
             );
           }
         }
@@ -126,19 +130,19 @@ export default {
       // );
       let filePath = path.join(
         "./" +
-          new Date().format("yyyy-MM-dd-hh-mm-ss") +
-          "-allExport.json"
+        new Date().format("yyyy-MM-dd-hh-mm-ss") +
+        "-allExport.json"
       );
       // this.$message.success(`文件导出路径: ` + filePath);
 
       // alert(filePath)
       var messageA = this.$message;
       var localData = JSON.stringify(localStorage);
-      localData=JSON.parse(localData)
-      Object.keys(localData).forEach((item)=>{
+      localData = JSON.parse(localData)
+      Object.keys(localData).forEach((item) => {
         localData[item] = JSON.parse(localData[item])
       })
-      fs.writeFile(filePath, JSON.stringify(localData, null, '\t'),'utf-8', function(err) {
+      fs.writeFile(filePath, JSON.stringify(localData, null, '\t'), 'utf-8', function(err) {
         // alert(err)
         // alert(JSON.stringify(localStorage))
         // this.$message.success(`文件已导出到: ` + filePath);
@@ -155,6 +159,7 @@ export default {
     // this.compute();
   },
 };
+
 </script>
 <style lang="scss">
 .month-page {
@@ -176,11 +181,13 @@ export default {
       width: 180px;
     }
   }
+
   .file-else {
     // width: 20%;
     margin-top: 5%;
     // padding-right: 15%;
   }
+
   .txl-btn {
     margin-right: 21px;
   }
@@ -200,4 +207,5 @@ export default {
     margin-top: 21px;
   }
 }
+
 </style>

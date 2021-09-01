@@ -381,7 +381,7 @@ export default {
     var data = localStorage.getItem("data" + this.month);
     if (data) {
       this.mainPane = JSON.parse(data);
-      if (!this.mainPane || this.mainPane.length == 0) {
+      if (this.mainPane.length == 0) {
         this.mainPane = paneMap[this.month];
         localStorage.setItem(
           "data" + this.month,

@@ -3,16 +3,7 @@
     <div v-show="!showFavorite" class="TinyMCE">
       <!-- TinyMCE：一款易用、且功能强大的所见即所得的富文本编辑器 -->
       <div class="line"></div>
-      <editor
-        v-model="tinymceHtml"
-        id="tinymce"
-        api-key="no-api-key"
-        :disabled="editorOptions.disabled"
-        :init="editorOptions.editorInit"
-        output-format="html"
-        @onChange="handleChange"
-      />
-
+      <editor v-model="tinymceHtml" id="tinymce" api-key="no-api-key" :disabled="editorOptions.disabled" :init="editorOptions.editorInit" output-format="html" @onChange="handleChange" />
       <!-- 预览 -->
       <div class="preview" v-if="false">
         {{ tinymceHtml ? tinymceHtml : "预览html结构" }}
@@ -29,24 +20,16 @@
     </div>
     <div v-show="showFavorite" class="add-input">
       <div class="line"></div>
-
       <div>
         <a-table bordered :data-source="dataSource1" :columns="columns1">
           <template slot="paste" slot-scope="text, record">
             <a href="javascript:;" @click="copyClip(record.key)">√</a>
           </template>
           <template slot="age" slot-scope="text, record">
-            <editable-cell
-              :text="text"
-              @change="onCellChange(record.key, 'age', $event, 1)"
-            />
+            <editable-cell :text="text" @change="onCellChange(record.key, 'age', $event, 1)" />
           </template>
           <template slot="operation" slot-scope="text, record">
-            <a-popconfirm
-              v-if="dataSource1"
-              title="Sure to delete?"
-              @confirm="() => onDelete(record.key, 1)"
-            >
+            <a-popconfirm v-if="dataSource1" title="Sure to delete?" @confirm="() => onDelete(record.key, 1)">
               <a href="javascript:;">X</a>
             </a-popconfirm>
           </template>
@@ -63,7 +46,6 @@
     </div>
   </div>
 </template>
-
 <script>
 // 引入组件
 import tinymce from "tinymce/tinymce";
@@ -93,14 +75,11 @@ export default {
       showFavorite: false,
 
       tinymceHtml: "",
-      dataSource1: [
-        {
-          key: "1",
-          age: "data",
-        },
-      ],
-      columns1: [
-        {
+      dataSource1: [{
+        key: "1",
+        age: "data",
+      }, ],
+      columns1: [{
           title: "",
           dataIndex: "paste",
           width: "3%",
@@ -130,8 +109,7 @@ export default {
           skin_url: "/static/tinymce/skins/ui/oxide", // 主题
           height: 320,
           plugins: "link lists image code table wordcount", // 用到的插件：链接、列表、图片、代码块、表格、字数
-          toolbar:
-            "undo redo | bold italic underline strikethrough | formatselect fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | link unlink table image | removeformat", // 工具栏
+          toolbar: "undo redo | bold italic underline strikethrough | formatselect fontsizeselect | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | link unlink table image | removeformat", // 工具栏
           images_upload_handler: (blobInfo, success, failure) => {
             // 图片上传
             console.log(blobInfo, success, failure, "上传图片====--==-");
@@ -150,6 +128,25 @@ export default {
   },
   mounted() {
     tinymce.init({});
+    var favorite = localStorage.getItem("favorite");
+
+
+    if (favorite) {
+      favorite = JSON.parse(favorite);
+      if (favorite.length == 0) {
+        localStorage.setItem(
+          "favorite",
+          JSON.stringify(this.dataSource2)
+        );
+      } else {
+        this.dataSource1 = favorite
+      }
+    } else {
+      localStorage.setItem(
+        "favorite",
+        JSON.stringify(this.dataSource1)
+      );
+    }
   },
   methods: {
     handleChange(e, editor) {
@@ -234,8 +231,8 @@ export default {
     // }
   },
 };
-</script>
 
+</script>
 <style lang="scss">
 .tiny-container {
   width: 100%;
@@ -243,6 +240,7 @@ export default {
   .TinyMCE {
     width: 100%;
     margin: 0 auto;
+
     .line {
       position: relative;
       top: -17px;
@@ -250,6 +248,7 @@ export default {
       border-bottom: 1px solid #ddd;
       left: -20px;
     }
+
     .preview {
       min-height: 200px;
       max-height: 400px;
@@ -259,20 +258,25 @@ export default {
       padding: 8px;
       word-wrap: break-word;
     }
+
     .copy-btn {
       margin-top: 28.5px;
       margin-right: 8px;
     }
+
     .clean-btn {
       margin-top: 28.5px;
     }
+
     .favorite-btn {
       margin-top: 28.5px;
       float: right;
     }
   }
+
   .add-input {
     width: 100%;
+
     .line {
       position: relative;
       top: -17px;
@@ -280,17 +284,20 @@ export default {
       border-bottom: 1px solid #ddd;
       left: -20px;
     }
-    
+
     .ant-table-row-cell-break-word {
       text-align: center;
     }
+
     .add-btn {
       float: right;
       right: 136px;
     }
+
     .favorite-btn {
       float: right;
     }
   }
 }
+
 </style>
