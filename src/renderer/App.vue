@@ -41,8 +41,8 @@ export default {
 <style lang="scss">
 /* CSS */
 #app {
-  min-width: 950px;
-  min-height: 540px;
+  min-width: 980px;
+  min-height: 575px;
   font-family:"Microsoft Yahei";
 }
 .ant-table-thead .ant-table-row-cell-break-word {
