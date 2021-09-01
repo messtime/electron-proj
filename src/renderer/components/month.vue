@@ -59,7 +59,7 @@ export default {
       try {
         let temp = JSON.parse(fileData);
         Object.keys(temp).forEach((item) => {
-          localStorage.setItem(item, temp[item]);
+          localStorage.setItem(item, JSON.stringify(temp[item]));
         });
         this.$message.success(filePath + `  文件已导入 `);
       } catch (error) {
@@ -117,18 +117,28 @@ export default {
         }
         return projectPath;
       }
-      mkdirPath("workRecord");
+      // mkdirPath("workRecord");
+      // let filePath = path.join(
+      //   "D:",
+      //   "/workRecord/" +
+      //     new Date().format("yyyy-MM-dd-hh-mm-ss") +
+      //     "-allExport.js"
+      // );
       let filePath = path.join(
-        "D:",
-        "/workRecord/" +
+        "./" +
           new Date().format("yyyy-MM-dd-hh-mm-ss") +
-          "-allExport.js"
+          "-allExport.json"
       );
       // this.$message.success(`文件导出路径: ` + filePath);
 
       // alert(filePath)
       var messageA = this.$message;
-      fs.writeFile(filePath, JSON.stringify(localStorage), function(err) {
+      var localData = JSON.stringify(localStorage);
+      localData=JSON.parse(localData)
+      Object.keys(localData).forEach((item)=>{
+        localData[item] = JSON.parse(localData[item])
+      })
+      fs.writeFile(filePath, JSON.stringify(localData, null, '\t'),'utf-8', function(err) {
         // alert(err)
         // alert(JSON.stringify(localStorage))
         // this.$message.success(`文件已导出到: ` + filePath);
